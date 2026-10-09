@@ -449,8 +449,21 @@ dialog[open] {
     transition-duration: 0.001s !important;
     scroll-behavior: auto !important;
   }
-  #hero-video {
-    display: none !important;
-  }
 }
+
+/* Language Toggle Button Styling */
+#lang-toggle-btn, #mobile-lang-toggle-btn {
+  user-select: none;
+  touch-action: manipulation;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#lang-toggle-btn:hover, #mobile-lang-toggle-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+#lang-toggle-btn:active, #mobile-lang-toggle-btn:active {
+  transform: translateY(0);
+}
+
+
 

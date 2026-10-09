@@ -15,6 +15,13 @@
 
   <title>VARANASI | Real Indian Flavors & Tandoori Fine Dining in Dongseong-ro, Daegu</title>
 
+  <!-- Website Favicon & App Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png"/>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="shortcut icon" href="favicon.ico"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+
   <!-- Google Fonts & Material Symbols -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
@@ -72,6 +79,9 @@
   <!-- External Stylesheet -->
   <link rel="stylesheet" href="styles.css"/>
 
+  <!-- Bilingual Translations Dictionary -->
+  <script src="translations.js"></script>
+
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
   {
@@ -109,27 +119,32 @@
       <!-- Brand Logo & Name (Clean & Compact) -->
       <a href="#top" class="flex flex-col shrink-0 group">
         <span class="font-headline-sm text-xl sm:text-2xl lg:text-3xl text-primary font-bold tracking-wide transition-colors group-hover:text-primary-container">VARANASI</span>
-        <span class="font-label-caps text-[9px] sm:text-[10px] tracking-widest uppercase text-secondary font-semibold -mt-0.5 sm:-mt-1">Dongseong-ro · Daegu</span>
+        <span class="font-label-caps text-[9px] sm:text-[10px] tracking-widest uppercase text-secondary font-semibold -mt-0.5 sm:-mt-1" data-i18n="nav_brand_sub">Dongseong-ro · Daegu</span>
       </a>
 
       <!-- Desktop Navigation Menu (Single Line, No Wrap) -->
       <nav class="hidden lg:flex items-center gap-6 xl:gap-8 whitespace-nowrap">
-        <a class="font-body-md text-primary font-bold border-b-2 border-secondary py-1 transition-colors" href="#top">Home</a>
-        <a class="font-body-md text-on-surface-variant hover:text-primary py-1 transition-colors" href="#signature-experience">Signatures</a>
-        <a class="font-body-md text-on-surface-variant hover:text-primary py-1 transition-colors" href="#our-story">Our Story</a>
-        <a class="font-body-md text-on-surface-variant hover:text-primary py-1 transition-colors" href="#complete-menu">Menu</a>
-        <a class="font-body-md text-on-surface-variant hover:text-primary py-1 transition-colors" href="#reviews">Reviews</a>
-        <a class="font-body-md text-on-surface-variant hover:text-primary py-1 transition-colors" href="#visit-sanctuary">Find Us</a>
+        <a class="font-body-md text-primary font-bold border-b-2 border-secondary py-1 transition-colors" href="#top" data-i18n="nav_home">Home</a>
+        <a class="font-body-md text-on-surface-variant hover:text-primary py-1 transition-colors" href="#signature-experience" data-i18n="nav_signatures">Signatures</a>
+        <a class="font-body-md text-on-surface-variant hover:text-primary py-1 transition-colors" href="#our-story" data-i18n="nav_story">Our Story</a>
+        <a class="font-body-md text-on-surface-variant hover:text-primary py-1 transition-colors" href="#complete-menu" data-i18n="nav_menu">Menu</a>
+        <a class="font-body-md text-on-surface-variant hover:text-primary py-1 transition-colors" href="#reviews" data-i18n="nav_reviews">Reviews</a>
+        <a class="font-body-md text-on-surface-variant hover:text-primary py-1 transition-colors" href="#visit-sanctuary" data-i18n="nav_find_us">Find Us</a>
       </nav>
 
       <!-- Right Header Actions (Clean & Single Line) -->
-      <div class="flex items-center gap-2 sm:gap-4 shrink-0 whitespace-nowrap">
-        <a href="tel:01097171118" aria-label="Call +82 10-9717-1118" title="Call Varanasi: +82 10-9717-1118" class="flex items-center justify-center w-10 h-10 min-w-[40px] min-h-[40px] rounded-full border border-sand-border bg-pure-cream hover:bg-surface-container text-primary hover:text-secondary shadow-xs transition-colors">
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0 whitespace-nowrap">
+        <a href="tel:01097171118" aria-label="Call +82 10-9717-1118" title="Call Varanasi: +82 10-9717-1118" data-i18n-aria="nav_call_aria" class="flex items-center justify-center w-10 h-10 min-w-[40px] min-h-[40px] rounded-full border border-sand-border bg-pure-cream hover:bg-surface-container text-primary hover:text-secondary shadow-xs transition-colors">
           <span class="material-symbols-outlined text-[20px]">call</span>
         </a>
         <button type="button" class="btn-open-reserve hidden sm:inline-flex items-center justify-center gap-1.5 bg-primary text-on-primary font-label-caps text-xs uppercase tracking-wider px-4 sm:px-5 py-2.5 min-h-[42px] rounded shadow-sm hover:bg-primary-container transition-all">
           <span class="material-symbols-outlined text-[16px]">calendar_month</span>
-          <span>Reserve Table</span>
+          <span data-i18n="nav_reserve">Reserve Table</span>
+        </button>
+        <!-- Language Toggle Button immediately to the right of Reservation button -->
+        <button id="lang-toggle-btn" type="button" aria-label="Switch language to Korean" class="inline-flex items-center justify-center gap-1.5 border border-sand-border bg-pure-cream hover:bg-surface-container text-primary font-label-caps text-xs px-3 sm:px-3.5 py-2 sm:py-2.5 min-h-[40px] sm:min-h-[42px] rounded shadow-xs transition-all font-semibold cursor-pointer">
+          <span class="material-symbols-outlined text-[16px] text-secondary">translate</span>
+          <span id="lang-toggle-text">한국어</span>
         </button>
         <button id="mobile-menu-btn" type="button" aria-controls="mobile-drawer" aria-expanded="false" aria-label="Toggle navigation menu" class="lg:hidden flex items-center justify-center w-10 h-10 min-w-[40px] min-h-[40px] rounded-lg bg-pure-cream text-primary border border-sand-border hover:bg-surface-container focus:outline-none transition-colors">
           <span class="material-symbols-outlined text-[24px]">menu</span>
@@ -149,7 +164,7 @@
       <div class="flex items-center justify-between pb-5 border-b border-sand-border">
         <div class="flex flex-col">
           <span class="font-headline-sm text-primary text-2xl font-bold tracking-wide">VARANASI</span>
-          <p class="text-[10px] text-secondary font-semibold uppercase tracking-widest -mt-0.5">Dongseong-ro · Daegu</p>
+          <p class="text-[10px] text-secondary font-semibold uppercase tracking-widest -mt-0.5" data-i18n="nav_brand_sub">Dongseong-ro · Daegu</p>
         </div>
         <button id="close-mobile-drawer" type="button" aria-label="Close navigation menu" class="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-primary hover:bg-surface-container transition-colors">
           <span class="material-symbols-outlined text-[28px]">close</span>
@@ -157,30 +172,36 @@
       </div>
 
       <nav class="flex flex-col py-5 space-y-1">
-        <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#top">Home</a>
-        <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#signature-experience">Signature Dishes</a>
-        <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#our-story">Our Story</a>
-        <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#complete-menu">Menu &amp; Pricing</a>
-        <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#reviews">Patron Reviews</a>
-        <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#visit-sanctuary">Location &amp; Visit</a>
+        <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#top" data-i18n="drawer_home">Home</a>
+        <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#signature-experience" data-i18n="drawer_signatures">Signature Dishes</a>
+        <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#our-story" data-i18n="drawer_story">Our Story</a>
+        <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#complete-menu" data-i18n="drawer_menu">Menu &amp; Pricing</a>
+        <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#reviews" data-i18n="drawer_reviews">Patron Reviews</a>
+        <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#visit-sanctuary" data-i18n="drawer_location">Location &amp; Visit</a>
       </nav>
 
       <div class="mt-auto pt-6 space-y-3 border-t border-sand-border">
+        <!-- Mobile Drawer Language Toggle -->
+        <button id="mobile-lang-toggle-btn" type="button" aria-label="Switch language to Korean" class="w-full min-h-[46px] flex items-center justify-center gap-2 bg-pure-cream border border-sand-border text-primary py-2.5 px-4 rounded-xl font-label-caps text-xs uppercase tracking-wider hover:bg-surface-container transition-all font-semibold shadow-xs">
+          <span class="material-symbols-outlined text-[18px] text-secondary">translate</span>
+          <span id="mobile-lang-toggle-text">한국어</span>
+        </button>
         <button type="button" class="btn-open-reserve w-full min-h-[48px] flex items-center justify-center gap-2 bg-primary text-on-primary py-3 px-4 rounded-xl font-label-caps uppercase text-xs tracking-wider shadow-md hover:bg-primary-container transition-all">
           <span class="material-symbols-outlined text-[18px]">calendar_month</span>
-          <span>Reserve a Table</span>
+          <span data-i18n="drawer_reserve">Reserve a Table</span>
         </button>
         <a href="tel:01097171118" class="w-full min-h-[48px] flex items-center justify-center gap-2 bg-pure-cream border border-sand-border text-primary py-3 px-4 rounded-xl font-label-caps uppercase text-xs tracking-wider hover:bg-surface-container transition-all">
           <span class="material-symbols-outlined text-[18px]">call</span>
-          <span>Call: +82 10-9717-1118</span>
+          <span data-i18n="drawer_call">Call: +82 10-9717-1118</span>
         </a>
         <div class="text-center text-[11px] text-charcoal-muted pt-2 space-y-0.5">
-          <p class="font-medium text-primary">2nd Floor, 85 Dongseong-ro 5-gil, Jung-gu, Daegu</p>
-          <p>Daily 11:30 – 22:00 (Tuesday Closed)</p>
+          <p class="font-medium text-primary" data-i18n="drawer_address">2nd Floor, 85 Dongseong-ro 5-gil, Jung-gu, Daegu</p>
+          <p data-i18n="drawer_hours">Daily 11:30 – 22:00 (Tuesday Closed)</p>
         </div>
       </div>
     </div>
   </div>
+
 
   <main class="w-full">
 
@@ -216,30 +237,30 @@
           
           <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[11px] sm:text-xs tracking-widest uppercase font-semibold">
             <span class="w-2 h-2 rounded-full bg-secondary-container"></span>
-            <span>Dongseong-ro, Daegu • 2nd Floor</span>
+            <span data-i18n="hero_pill">Dongseong-ro, Daegu • 2nd Floor</span>
           </div>
 
-          <h1 class="font-display-hero text-3xl sm:text-5xl lg:text-6xl text-white font-semibold leading-[1.14] tracking-tight">
+          <h1 class="font-display-hero text-3xl sm:text-5xl lg:text-6xl text-white font-semibold leading-[1.14] tracking-tight" data-i18n-html="hero_title">
             Real Indian Flavors.<br/>
             <span class="italic font-normal text-secondary-fixed">Timeless</span> Moments.
           </h1>
 
-          <p class="font-body-lg text-base sm:text-lg text-white/90 leading-relaxed font-normal max-w-xl">
+          <p class="font-body-lg text-base sm:text-lg text-white/90 leading-relaxed font-normal max-w-xl" data-i18n="hero_desc">
             Authentic North Indian curries, roaring clay tandoor cooking, and ancestral recipes by Chef Dhyan in downtown Daegu. No shortcuts. Zero fusion.
           </p>
 
           <!-- Simple Clean Action Buttons (Stacked on Mobile, Row on Desktop) -->
           <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
             <a href="#complete-menu" class="w-full sm:w-auto min-h-[46px] inline-flex items-center justify-center gap-2 bg-secondary text-pure-cream font-label-caps uppercase text-xs tracking-wider px-6 sm:px-7 py-3 rounded-lg shadow-lg hover:bg-on-secondary-container transition-all">
-              <span>Explore Menu</span>
+              <span data-i18n="hero_btn_menu">Explore Menu</span>
               <span class="material-symbols-outlined text-[18px]">restaurant_menu</span>
             </a>
             <button type="button" class="btn-open-reserve w-full sm:w-auto min-h-[46px] inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 text-white backdrop-blur-md border border-white/30 font-label-caps uppercase text-xs tracking-wider px-6 sm:px-7 py-3 rounded-lg transition-all">
-              <span>Book a Table</span>
+              <span data-i18n="hero_btn_book">Book a Table</span>
               <span class="material-symbols-outlined text-[18px]">calendar_month</span>
             </button>
             <a href="#visit-sanctuary" class="inline-flex items-center justify-center gap-1.5 text-white/80 hover:text-white text-xs font-semibold underline underline-offset-4 py-2 sm:px-2 transition-colors">
-              <span>Find Us</span>
+              <span data-i18n="hero_btn_find">Find Us</span>
               <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
             </a>
           </div>
@@ -248,12 +269,12 @@
           <div class="flex flex-wrap items-center gap-2 sm:gap-4 pt-3 text-[11px] sm:text-xs text-white/80 border-t border-white/15">
             <div id="live-status-pill" class="flex items-center gap-2">
               <span class="pulse-indicator open"></span>
-              <span>Daily 11:30 – 22:00 (Tue Closed)</span>
+              <span data-i18n="drawer_hours">Daily 11:30 – 22:00 (Tue Closed)</span>
             </div>
             <span class="hidden sm:inline">•</span>
-            <span class="bg-white/10 sm:bg-transparent px-2 py-0.5 sm:p-0 rounded">1hr Free Parking (Naver Review)</span>
+            <span class="bg-white/10 sm:bg-transparent px-2 py-0.5 sm:p-0 rounded" data-i18n="hero_parking_badge">1hr Free Parking (Naver Review)</span>
             <span class="hidden sm:inline">•</span>
-            <span class="bg-white/10 sm:bg-transparent px-2 py-0.5 sm:p-0 rounded">Halal Friendly Poultry</span>
+            <span class="bg-white/10 sm:bg-transparent px-2 py-0.5 sm:p-0 rounded" data-i18n="hero_halal_badge">Halal Friendly Poultry</span>
           </div>
 
         </div>
@@ -263,7 +284,7 @@
       <div class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex items-center">
         <button id="hero-video-toggle" type="button" aria-label="Pause background video" class="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-[36px] rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-md border border-white/20 text-white/90 text-xs font-label-caps tracking-wider transition-all">
           <span class="material-symbols-outlined text-[16px]" id="hero-video-icon">pause</span>
-          <span id="hero-video-text">Pause Video</span>
+          <span id="hero-video-text" data-i18n="hero_video_pause">Pause Video</span>
         </button>
       </div>
     </section>
@@ -274,31 +295,32 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center md:text-left">
           
           <div class="space-y-1">
-            <span class="font-label-caps text-[10px] sm:text-xs uppercase text-secondary font-bold tracking-wider">Location</span>
-            <p class="font-headline-md text-xl sm:text-2xl text-primary font-bold">Daegu, 2024</p>
-            <p class="font-body-sm text-[11px] sm:text-xs text-charcoal-muted">Samdeok Rodeo Alley corridor (2nd Fl.)</p>
+            <span class="font-label-caps text-[10px] sm:text-xs uppercase text-secondary font-bold tracking-wider" data-i18n="heritage_loc_label">Location</span>
+            <p class="font-headline-md text-xl sm:text-2xl text-primary font-bold" data-i18n="heritage_loc_val">Daegu, 2024</p>
+            <p class="font-body-sm text-[11px] sm:text-xs text-charcoal-muted" data-i18n="heritage_loc_sub">Samdeok Rodeo Alley corridor (2nd Fl.)</p>
           </div>
 
           <div class="space-y-1">
-            <span class="font-label-caps text-[10px] sm:text-xs uppercase text-secondary font-bold tracking-wider">Chef &amp; Visionary</span>
-            <p class="font-headline-md text-xl sm:text-2xl text-primary font-bold">Chef Dhyan</p>
-            <p class="font-body-sm text-[11px] sm:text-xs text-charcoal-muted">Generations of North Indian mastery</p>
+            <span class="font-label-caps text-[10px] sm:text-xs uppercase text-secondary font-bold tracking-wider" data-i18n="heritage_chef_label">Chef &amp; Visionary</span>
+            <p class="font-headline-md text-xl sm:text-2xl text-primary font-bold" data-i18n="heritage_chef_val">Chef Dhyan</p>
+            <p class="font-body-sm text-[11px] sm:text-xs text-charcoal-muted" data-i18n="heritage_chef_sub">Generations of North Indian mastery</p>
           </div>
 
           <div class="space-y-1">
-            <span class="font-label-caps text-[10px] sm:text-xs uppercase text-secondary font-bold tracking-wider">Purity Standards</span>
-            <p class="font-headline-md text-xl sm:text-2xl text-primary font-bold">100% Real Spices</p>
-            <p class="font-body-sm text-[11px] sm:text-xs text-charcoal-muted">Zero fusion, strictly authentic recipes</p>
+            <span class="font-label-caps text-[10px] sm:text-xs uppercase text-secondary font-bold tracking-wider" data-i18n="heritage_purity_label">Purity Standards</span>
+            <p class="font-headline-md text-xl sm:text-2xl text-primary font-bold" data-i18n="heritage_purity_val">100% Real Spices</p>
+            <p class="font-body-sm text-[11px] sm:text-xs text-charcoal-muted" data-i18n="heritage_purity_sub">Zero fusion, strictly authentic recipes</p>
           </div>
 
           <div class="space-y-1">
-            <span class="font-label-caps text-[10px] sm:text-xs uppercase text-secondary font-bold tracking-wider">Guest Rating</span>
+            <span class="font-label-caps text-[10px] sm:text-xs uppercase text-secondary font-bold tracking-wider" data-i18n="heritage_rating_label">Guest Rating</span>
             <p class="font-headline-md text-xl sm:text-2xl text-primary font-bold flex items-center justify-center md:justify-start gap-1">
               <span>4.9</span>
               <span class="text-secondary text-lg sm:text-xl">★</span>
             </p>
-            <p class="font-body-sm text-[11px] sm:text-xs text-charcoal-muted">Across 200+ Google &amp; Naver patrons</p>
+            <p class="font-body-sm text-[11px] sm:text-xs text-charcoal-muted" data-i18n="heritage_rating_sub">Across 200+ Google &amp; Naver patrons</p>
           </div>
+
 
         </div>
       </div>
@@ -311,10 +333,10 @@
         <!-- Section Header -->
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-3 sm:gap-4">
           <div class="space-y-2 max-w-xl">
-            <span class="font-label-caps text-xs uppercase text-secondary tracking-widest font-bold">Gastronomic Signatures</span>
-            <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-4xl text-primary font-semibold">The Cornerstones of Varanasi</h2>
+            <span class="font-label-caps text-xs uppercase text-secondary tracking-widest font-bold" data-i18n="sig_eyebrow">Gastronomic Signatures</span>
+            <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-4xl text-primary font-semibold" data-i18n="sig_title">The Cornerstones of Varanasi</h2>
           </div>
-          <p class="font-title-editorial text-base sm:text-lg text-primary italic max-w-md">“Authentic family recipes with zero shortcuts.”</p>
+          <p class="font-title-editorial text-base sm:text-lg text-primary italic max-w-md" data-i18n="sig_quote">“Authentic family recipes with zero shortcuts.”</p>
         </div>
 
         <!-- Dish Grid -->
@@ -328,19 +350,19 @@
                    data-caption="Signature Butter Chicken (Murgh Makhani) simmered in a copper handi with heavy cream swirl."
                    alt="Butter Chicken Murgh Makhani" 
                    src="butter-chicken.jpg"/>
-              <span class="absolute top-3 left-3 bg-secondary text-pure-cream font-label-caps text-[11px] uppercase px-2.5 py-0.5 rounded shadow-sm">Signature</span>
+              <span class="absolute top-3 left-3 bg-secondary text-pure-cream font-label-caps text-[11px] uppercase px-2.5 py-0.5 rounded shadow-sm" data-i18n="sig_badge_1">Signature</span>
             </div>
             <div class="p-5 flex flex-col justify-between flex-1 space-y-3">
               <div>
                 <div class="flex items-baseline justify-between gap-2">
-                  <h3 class="font-headline-sm text-lg text-primary font-bold">Butter Chicken</h3>
+                  <h3 class="font-headline-sm text-lg text-primary font-bold" data-i18n="sig_item1_title">Butter Chicken</h3>
                   <span class="text-secondary font-bold text-base">₩17,000</span>
                 </div>
-                <p class="font-body-sm text-xs text-charcoal-muted mt-2 leading-relaxed">
+                <p class="font-body-sm text-xs text-charcoal-muted mt-2 leading-relaxed" data-i18n="sig_item1_desc">
                   Tandoor chicken in rich tomato, fenugreek, and cultured butter gravy.
                 </p>
               </div>
-              <span class="text-[11px] text-charcoal-muted bg-surface-container px-2 py-0.5 rounded w-max">Mild &amp; Rich · Halal</span>
+              <span class="text-[11px] text-charcoal-muted bg-surface-container px-2 py-0.5 rounded w-max" data-i18n="sig_item1_tag">Mild &amp; Rich · Halal</span>
             </div>
           </div>
 
@@ -352,19 +374,19 @@
                    data-caption="Sizzling Tandoori Chicken charred dark red with natural Kashmiri chili and mustard oil."
                    alt="Sizzling Tandoori Chicken" 
                    src="tandoori-chicken.jpg"/>
-              <span class="absolute top-3 left-3 bg-primary text-on-primary font-label-caps text-[11px] uppercase px-2.5 py-0.5 rounded shadow-sm">Clay Oven</span>
+              <span class="absolute top-3 left-3 bg-primary text-on-primary font-label-caps text-[11px] uppercase px-2.5 py-0.5 rounded shadow-sm" data-i18n="sig_badge_2">Clay Oven</span>
             </div>
             <div class="p-5 flex flex-col justify-between flex-1 space-y-3">
               <div>
                 <div class="flex items-baseline justify-between gap-2">
-                  <h3 class="font-headline-sm text-lg text-primary font-bold">Tandoori Chicken</h3>
+                  <h3 class="font-headline-sm text-lg text-primary font-bold" data-i18n="sig_item2_title">Tandoori Chicken</h3>
                   <span class="text-secondary font-bold text-base">₩19,000</span>
                 </div>
-                <p class="font-body-sm text-xs text-charcoal-muted mt-2 leading-relaxed">
+                <p class="font-body-sm text-xs text-charcoal-muted mt-2 leading-relaxed" data-i18n="sig_item2_desc">
                   24-hour spiced yogurt marinade, charred to smoky perfection at 400°C.
                 </p>
               </div>
-              <span class="text-[11px] text-charcoal-muted bg-surface-container px-2 py-0.5 rounded w-max">Medium Spice · Halal</span>
+              <span class="text-[11px] text-charcoal-muted bg-surface-container px-2 py-0.5 rounded w-max" data-i18n="sig_item2_tag">Medium Spice · Halal</span>
             </div>
           </div>
 
@@ -376,19 +398,19 @@
                    data-caption="Authentic Royal Saffron Dum Biryani served in a hammered copper handi with cucumber cumin raita."
                    alt="Saffron Dum Biryani" 
                    src="biryani.jpg"/>
-              <span class="absolute top-3 left-3 bg-secondary text-pure-cream font-label-caps text-[11px] uppercase px-2.5 py-0.5 rounded shadow-sm">Royal Dum</span>
+              <span class="absolute top-3 left-3 bg-secondary text-pure-cream font-label-caps text-[11px] uppercase px-2.5 py-0.5 rounded shadow-sm" data-i18n="sig_badge_3">Royal Dum</span>
             </div>
             <div class="p-5 flex flex-col justify-between flex-1 space-y-3">
               <div>
                 <div class="flex items-baseline justify-between gap-2">
-                  <h3 class="font-headline-sm text-lg text-primary font-bold">Saffron Dum Biryani</h3>
+                  <h3 class="font-headline-sm text-lg text-primary font-bold" data-i18n="sig_item3_title">Saffron Dum Biryani</h3>
                   <span class="text-secondary font-bold text-base">₩16,000</span>
                 </div>
-                <p class="font-body-sm text-xs text-charcoal-muted mt-2 leading-relaxed">
+                <p class="font-body-sm text-xs text-charcoal-muted mt-2 leading-relaxed" data-i18n="sig_item3_desc">
                   Aged basmati slow-steamed under seal with saffron and fresh raita.
                 </p>
               </div>
-              <span class="text-[11px] text-charcoal-muted bg-surface-container px-2 py-0.5 rounded w-max">Chicken or Mutton</span>
+              <span class="text-[11px] text-charcoal-muted bg-surface-container px-2 py-0.5 rounded w-max" data-i18n="sig_item3_tag">Chicken or Mutton</span>
             </div>
           </div>
 
@@ -400,19 +422,19 @@
                    data-caption="Freshly baked artisanal Garlic Naan glistening with butter, roasted garlic, and cilantro."
                    alt="Fresh Garlic Naan" 
                    src="garlic-naan.jpg"/>
-              <span class="absolute top-3 left-3 bg-primary text-on-primary font-label-caps text-[11px] uppercase px-2.5 py-0.5 rounded shadow-sm">Fresh Baked</span>
+              <span class="absolute top-3 left-3 bg-primary text-on-primary font-label-caps text-[11px] uppercase px-2.5 py-0.5 rounded shadow-sm" data-i18n="sig_badge_4">Fresh Baked</span>
             </div>
             <div class="p-5 flex flex-col justify-between flex-1 space-y-3">
               <div>
                 <div class="flex items-baseline justify-between gap-2">
-                  <h3 class="font-headline-sm text-lg text-primary font-bold">Fresh Garlic Naan</h3>
+                  <h3 class="font-headline-sm text-lg text-primary font-bold" data-i18n="sig_item4_title">Fresh Garlic Naan</h3>
                   <span class="text-secondary font-bold text-base">₩3,500</span>
                 </div>
-                <p class="font-body-sm text-xs text-charcoal-muted mt-2 leading-relaxed">
+                <p class="font-body-sm text-xs text-charcoal-muted mt-2 leading-relaxed" data-i18n="sig_item4_desc">
                   Hand-stretched and slap-baked against clay walls, brushed with ghee.
                 </p>
               </div>
-              <span class="text-[11px] text-charcoal-muted bg-surface-container px-2 py-0.5 rounded w-max">Vegetarian</span>
+              <span class="text-[11px] text-charcoal-muted bg-surface-container px-2 py-0.5 rounded w-max" data-i18n="sig_item4_tag">Vegetarian</span>
             </div>
           </div>
 
@@ -438,35 +460,35 @@
 
           <div class="lg:col-span-7 flex flex-col space-y-5 sm:space-y-6">
             <div class="space-y-2">
-              <span class="font-label-caps text-xs uppercase text-secondary tracking-widest font-bold">Heritage &amp; Lineage</span>
-              <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-4xl text-primary font-semibold">India’s Culinary Soul, Served in Daegu.</h2>
+              <span class="font-label-caps text-xs uppercase text-secondary tracking-widest font-bold" data-i18n="story_eyebrow">Heritage &amp; Lineage</span>
+              <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-4xl text-primary font-semibold" data-i18n="story_title">India’s Culinary Soul, Served in Daegu.</h2>
             </div>
 
-            <p class="font-body-md text-sm sm:text-base text-on-surface-variant leading-relaxed">
+            <p class="font-body-md text-sm sm:text-base text-on-surface-variant leading-relaxed" data-i18n="story_p1">
               Varanasi is a tribute to the timeless culinary traditions of Northern India. Opened in 2024 near Samdeok Rodeo Alley by Chef Dhyan, our second-floor restaurant brings the aromas of Delhi straight to downtown Daegu.
             </p>
 
-            <p class="font-body-sm text-xs sm:text-sm text-charcoal-muted leading-relaxed">
+            <p class="font-body-sm text-xs sm:text-sm text-charcoal-muted leading-relaxed" data-i18n="story_p2">
               Step through our door on Dongseong-ro 5-gil and the street noise fades into warm hospitality: live clay tandoor cooking, freshly crushed cloves and cardamom, and slow-brewed spiced masala chai.
             </p>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-2">
               <div class="p-4 rounded-lg bg-warm-ivory space-y-1 border border-sand-border">
                 <span class="material-symbols-outlined text-secondary text-[24px]">oven_gen</span>
-                <h4 class="font-label-md text-sm text-primary font-bold">Clay Tandoor</h4>
-                <p class="font-body-sm text-xs text-charcoal-muted">400°C earthen heat for authentic char.</p>
+                <h4 class="font-label-md text-sm text-primary font-bold" data-i18n="story_feat1_title">Clay Tandoor</h4>
+                <p class="font-body-sm text-xs text-charcoal-muted" data-i18n="story_feat1_desc">400°C earthen heat for authentic char.</p>
               </div>
 
               <div class="p-4 rounded-lg bg-warm-ivory space-y-1 border border-sand-border">
                 <span class="material-symbols-outlined text-secondary text-[24px]">grain</span>
-                <h4 class="font-label-md text-sm text-primary font-bold">Stone Masalas</h4>
-                <p class="font-body-sm text-xs text-charcoal-muted">Dry-roasted and ground weekly by hand.</p>
+                <h4 class="font-label-md text-sm text-primary font-bold" data-i18n="story_feat2_title">Stone Masalas</h4>
+                <p class="font-body-sm text-xs text-charcoal-muted" data-i18n="story_feat2_desc">Dry-roasted and ground weekly by hand.</p>
               </div>
 
               <div class="p-4 rounded-lg bg-warm-ivory space-y-1 border border-sand-border">
                 <span class="material-symbols-outlined text-secondary text-[24px]">coffee</span>
-                <h4 class="font-label-md text-sm text-primary font-bold">Handmade Chai</h4>
-                <p class="font-body-sm text-xs text-charcoal-muted">Simmered fresh with whole ginger &amp; cloves.</p>
+                <h4 class="font-label-md text-sm text-primary font-bold" data-i18n="story_feat3_title">Handmade Chai</h4>
+                <p class="font-body-sm text-xs text-charcoal-muted" data-i18n="story_feat3_desc">Simmered fresh with whole ginger &amp; cloves.</p>
               </div>
             </div>
 
@@ -481,28 +503,28 @@
       <div class="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
         
         <div class="text-center max-w-xl mx-auto space-y-2 mb-6 sm:mb-10">
-          <span class="font-label-caps text-xs uppercase text-secondary tracking-widest font-bold">Dining Selection</span>
-          <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-4xl text-primary font-semibold">The Full Varanasi Menu</h2>
+          <span class="font-label-caps text-xs uppercase text-secondary tracking-widest font-bold" data-i18n="menu_eyebrow">Dining Selection</span>
+          <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-4xl text-primary font-semibold" data-i18n="menu_title">The Full Varanasi Menu</h2>
         </div>
 
         <!-- Filter Tabs (Touch-friendly horizontal scroll row on mobile, centered on desktop) -->
         <div class="flex items-center gap-2 pb-3 mb-8 overflow-x-auto no-scrollbar sm:justify-center -mx-4 px-4 sm:mx-0">
-          <button type="button" data-category="all" class="menu-tab-btn whitespace-nowrap shrink-0 min-h-[40px] bg-primary text-on-primary shadow-sm px-4 sm:px-5 py-2 rounded-full font-label-md text-xs uppercase tracking-wider transition-all">
+          <button type="button" data-category="all" class="menu-tab-btn whitespace-nowrap shrink-0 min-h-[40px] bg-primary text-on-primary shadow-sm px-4 sm:px-5 py-2 rounded-full font-label-md text-xs uppercase tracking-wider transition-all" data-i18n="tab_all">
             All Dishes
           </button>
-          <button type="button" data-category="curry" class="menu-tab-btn whitespace-nowrap shrink-0 min-h-[40px] bg-pure-cream text-charcoal-muted hover:text-primary px-4 sm:px-5 py-2 rounded-full font-label-md text-xs uppercase tracking-wider transition-all border border-sand-border">
+          <button type="button" data-category="curry" class="menu-tab-btn whitespace-nowrap shrink-0 min-h-[40px] bg-pure-cream text-charcoal-muted hover:text-primary px-4 sm:px-5 py-2 rounded-full font-label-md text-xs uppercase tracking-wider transition-all border border-sand-border" data-i18n="tab_curry">
             Curries
           </button>
-          <button type="button" data-category="tandoor" class="menu-tab-btn whitespace-nowrap shrink-0 min-h-[40px] bg-pure-cream text-charcoal-muted hover:text-primary px-4 sm:px-5 py-2 rounded-full font-label-md text-xs uppercase tracking-wider transition-all border border-sand-border">
+          <button type="button" data-category="tandoor" class="menu-tab-btn whitespace-nowrap shrink-0 min-h-[40px] bg-pure-cream text-charcoal-muted hover:text-primary px-4 sm:px-5 py-2 rounded-full font-label-md text-xs uppercase tracking-wider transition-all border border-sand-border" data-i18n="tab_tandoor">
             Tandoor &amp; Breads
           </button>
-          <button type="button" data-category="starters" class="menu-tab-btn whitespace-nowrap shrink-0 min-h-[40px] bg-pure-cream text-charcoal-muted hover:text-primary px-4 sm:px-5 py-2 rounded-full font-label-md text-xs uppercase tracking-wider transition-all border border-sand-border">
+          <button type="button" data-category="starters" class="menu-tab-btn whitespace-nowrap shrink-0 min-h-[40px] bg-pure-cream text-charcoal-muted hover:text-primary px-4 sm:px-5 py-2 rounded-full font-label-md text-xs uppercase tracking-wider transition-all border border-sand-border" data-i18n="tab_starters">
             Starters
           </button>
-          <button type="button" data-category="drinks" class="menu-tab-btn whitespace-nowrap shrink-0 min-h-[40px] bg-pure-cream text-charcoal-muted hover:text-primary px-4 sm:px-5 py-2 rounded-full font-label-md text-xs uppercase tracking-wider transition-all border border-sand-border">
+          <button type="button" data-category="drinks" class="menu-tab-btn whitespace-nowrap shrink-0 min-h-[40px] bg-pure-cream text-charcoal-muted hover:text-primary px-4 sm:px-5 py-2 rounded-full font-label-md text-xs uppercase tracking-wider transition-all border border-sand-border" data-i18n="tab_drinks">
             Chai &amp; Lassi
           </button>
-          <button type="button" data-category="vegetarian" class="menu-tab-btn whitespace-nowrap shrink-0 min-h-[40px] bg-pure-cream text-charcoal-muted hover:text-primary px-4 sm:px-5 py-2 rounded-full font-label-md text-xs uppercase tracking-wider transition-all border border-sand-border">
+          <button type="button" data-category="vegetarian" class="menu-tab-btn whitespace-nowrap shrink-0 min-h-[40px] bg-pure-cream text-charcoal-muted hover:text-primary px-4 sm:px-5 py-2 rounded-full font-label-md text-xs uppercase tracking-wider transition-all border border-sand-border" data-i18n="tab_vegetarian">
             Vegetarian
           </button>
         </div>
@@ -512,180 +534,180 @@
           
           <div class="menu-card bg-pure-cream p-6 rounded-xl shadow-sm space-y-4 border border-sand-border" data-categories="starters vegetarian">
             <div class="border-b border-sand-border/70 pb-3 flex justify-between items-center">
-              <h3 class="font-headline-sm text-lg text-primary font-bold">Street Starters</h3>
-              <span class="text-xs uppercase text-secondary font-semibold">Delhi Snacks</span>
+              <h3 class="font-headline-sm text-lg text-primary font-bold" data-i18n="menu_cat_starters">Street Starters</h3>
+              <span class="text-xs uppercase text-secondary font-semibold" data-i18n="menu_sub_starters">Delhi Snacks</span>
             </div>
             <div class="space-y-3">
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Crispy Potato &amp; Pea Samosas (2 pcs)</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_samosa_title">Crispy Potato &amp; Pea Samosas (2 pcs)</span>
                   <span class="text-secondary font-bold text-sm">₩6,000</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Golden hand-folded pastry with spiced potatoes &amp; tamarind chutney.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_samosa_desc">Golden hand-folded pastry with spiced potatoes &amp; tamarind chutney.</p>
               </div>
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Onion Bhaji / Pakoras</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_bhaji_title">Onion Bhaji / Pakoras</span>
                   <span class="text-secondary font-bold text-sm">₩7,000</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Crispy gram-flour fritters with carom seed &amp; fresh mint dip.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_bhaji_desc">Crispy gram-flour fritters with carom seed &amp; fresh mint dip.</p>
               </div>
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Pani Puri Shots (Weekend Special)</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_panipuri_title">Pani Puri Shots (Weekend Special)</span>
                   <span class="text-secondary font-bold text-sm">₩8,000</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Crisp hollow puris filled with spiced potato and tangy mint water.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_panipuri_desc">Crisp hollow puris filled with spiced potato and tangy mint water.</p>
               </div>
             </div>
           </div>
 
           <div class="menu-card bg-pure-cream p-6 rounded-xl shadow-sm space-y-4 border border-sand-border" data-categories="curry">
             <div class="border-b border-sand-border/70 pb-3 flex justify-between items-center">
-              <h3 class="font-headline-sm text-lg text-primary font-bold">Royal Meat Curries</h3>
-              <span class="text-xs uppercase text-secondary font-semibold">Halal Poultry</span>
+              <h3 class="font-headline-sm text-lg text-primary font-bold" data-i18n="menu_cat_meat">Royal Meat Curries</h3>
+              <span class="text-xs uppercase text-secondary font-semibold" data-i18n="menu_sub_meat">Halal Poultry</span>
             </div>
             <div class="space-y-3">
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Butter Chicken (Murgh Makhani)</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_butter_chicken_title">Butter Chicken (Murgh Makhani)</span>
                   <span class="text-secondary font-bold text-sm">₩17,000</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Tandoor chicken in velvet tomato &amp; cultured butter gravy.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_butter_chicken_desc">Tandoor chicken in velvet tomato &amp; cultured butter gravy.</p>
               </div>
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Chicken Tikka Masala</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_tikka_masala_title">Chicken Tikka Masala</span>
                   <span class="text-secondary font-bold text-sm">₩17,500</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Roasted chicken chunks in spiced bell pepper and tomato gravy.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_tikka_masala_desc">Roasted chicken chunks in spiced bell pepper and tomato gravy.</p>
               </div>
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Lamb Rogan Josh</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_rogan_josh_title">Lamb Rogan Josh</span>
                   <span class="text-secondary font-bold text-sm">₩19,500</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Slow-braised Australian lamb in Kashmiri chili &amp; fennel gravy.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_rogan_josh_desc">Slow-braised Australian lamb in Kashmiri chili &amp; fennel gravy.</p>
               </div>
             </div>
           </div>
 
           <div class="menu-card bg-pure-cream p-6 rounded-xl shadow-sm space-y-4 border border-sand-border" data-categories="curry vegetarian">
             <div class="border-b border-sand-border/70 pb-3 flex justify-between items-center">
-              <h3 class="font-headline-sm text-lg text-primary font-bold">Vegetarian Curries</h3>
-              <span class="text-xs uppercase text-secondary font-semibold">Paneer &amp; Dal</span>
+              <h3 class="font-headline-sm text-lg text-primary font-bold" data-i18n="menu_cat_veg">Vegetarian Curries</h3>
+              <span class="text-xs uppercase text-secondary font-semibold" data-i18n="menu_sub_veg">Paneer &amp; Dal</span>
             </div>
             <div class="space-y-3">
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Palak Paneer</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_palak_paneer_title">Palak Paneer</span>
                   <span class="text-secondary font-bold text-sm">₩16,000</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Organic pureed spinach with garlic, cream, and tender house paneer cubes.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_palak_paneer_desc">Organic pureed spinach with garlic, cream, and tender house paneer cubes.</p>
               </div>
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Dal Makhani</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_dal_makhani_title">Dal Makhani</span>
                   <span class="text-secondary font-bold text-sm">₩14,000</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Black lentils slow-cooked overnight with fresh cream and butter.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_dal_makhani_desc">Black lentils slow-cooked overnight with fresh cream and butter.</p>
               </div>
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Chana Masala</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_chana_masala_title">Chana Masala</span>
                   <span class="text-secondary font-bold text-sm">₩13,500</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Chickpeas simmered in roasted cumin and tangy mango masala.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_chana_masala_desc">Chickpeas simmered in roasted cumin and tangy mango masala.</p>
               </div>
             </div>
           </div>
 
           <div class="menu-card bg-pure-cream p-6 rounded-xl shadow-sm space-y-4 border border-sand-border" data-categories="tandoor vegetarian">
             <div class="border-b border-sand-border/70 pb-3 flex justify-between items-center">
-              <h3 class="font-headline-sm text-lg text-primary font-bold">Tandoor Breads</h3>
-              <span class="text-xs uppercase text-secondary font-semibold">Clay Oven</span>
+              <h3 class="font-headline-sm text-lg text-primary font-bold" data-i18n="menu_cat_breads">Tandoor Breads</h3>
+              <span class="text-xs uppercase text-secondary font-semibold" data-i18n="menu_sub_breads">Clay Oven</span>
             </div>
             <div class="space-y-3">
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Garlic Butter Naan</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_garlic_naan_title">Garlic Butter Naan</span>
                   <span class="text-secondary font-bold text-sm">₩3,500</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Baked flatbread with melted butter &amp; roasted minced garlic.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_garlic_naan_desc">Baked flatbread with melted butter &amp; roasted minced garlic.</p>
               </div>
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Cheese Naan (Mozzarella)</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_cheese_naan_title">Cheese Naan (Mozzarella)</span>
                   <span class="text-secondary font-bold text-sm">₩5,000</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Stuffed with melted mozzarella and brushed with clarified ghee.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_cheese_naan_desc">Stuffed with melted mozzarella and brushed with clarified ghee.</p>
               </div>
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Tandoori Roti</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_roti_title">Tandoori Roti</span>
                   <span class="text-secondary font-bold text-sm">₩2,500</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Whole wheat flatbread cooked crisp against clay walls.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_roti_desc">Whole wheat flatbread cooked crisp against clay walls.</p>
               </div>
             </div>
           </div>
 
           <div class="menu-card bg-pure-cream p-6 rounded-xl shadow-sm space-y-4 border border-sand-border" data-categories="tandoor curry">
             <div class="border-b border-sand-border/70 pb-3 flex justify-between items-center">
-              <h3 class="font-headline-sm text-lg text-primary font-bold">Royal Biryani</h3>
-              <span class="text-xs uppercase text-secondary font-semibold">Aged Basmati</span>
+              <h3 class="font-headline-sm text-lg text-primary font-bold" data-i18n="menu_cat_biryani">Royal Biryani</h3>
+              <span class="text-xs uppercase text-secondary font-semibold" data-i18n="menu_sub_biryani">Aged Basmati</span>
             </div>
             <div class="space-y-3">
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Chicken Dum Biryani</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_chicken_biryani_title">Chicken Dum Biryani</span>
                   <span class="text-secondary font-bold text-sm">₩16,000</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Layered saffron rice with spiced chicken, served with raita.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_chicken_biryani_desc">Layered saffron rice with spiced chicken, served with raita.</p>
               </div>
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Mutton Dum Biryani</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_mutton_biryani_title">Mutton Dum Biryani</span>
                   <span class="text-secondary font-bold text-sm">₩18,000</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Tender Australian mutton sealed in dough and slow steamed.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_mutton_biryani_desc">Tender Australian mutton sealed in dough and slow steamed.</p>
               </div>
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Jeera Cumin Rice</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_jeera_rice_title">Jeera Cumin Rice</span>
                   <span class="text-secondary font-bold text-sm">₩4,000</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Basmati rice tempered with whole cumin and ghee.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_jeera_rice_desc">Basmati rice tempered with whole cumin and ghee.</p>
               </div>
             </div>
           </div>
 
           <div class="menu-card bg-pure-cream p-6 rounded-xl shadow-sm space-y-4 border border-sand-border" data-categories="drinks vegetarian">
             <div class="border-b border-sand-border/70 pb-3 flex justify-between items-center">
-              <h3 class="font-headline-sm text-lg text-primary font-bold">Drinks &amp; Chai</h3>
-              <span class="text-xs uppercase text-secondary font-semibold">Handcrafted</span>
+              <h3 class="font-headline-sm text-lg text-primary font-bold" data-i18n="menu_cat_drinks">Drinks &amp; Chai</h3>
+              <span class="text-xs uppercase text-secondary font-semibold" data-i18n="menu_sub_drinks">Handcrafted</span>
             </div>
             <div class="space-y-3">
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Varanasi Masala Chai</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_chai_title">Varanasi Masala Chai</span>
                   <span class="text-secondary font-bold text-sm">₩5,000</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Simmered Assam tea, crushed ginger, cloves, and milk.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_chai_desc">Simmered Assam tea, crushed ginger, cloves, and milk.</p>
               </div>
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Alphonso Mango Lassi</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_mango_lassi_title">Alphonso Mango Lassi</span>
                   <span class="text-secondary font-bold text-sm">₩5,500</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Thick churned yogurt with Indian mango pulp.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_mango_lassi_desc">Thick churned yogurt with Indian mango pulp.</p>
               </div>
               <div>
                 <div class="flex justify-between items-baseline">
-                  <span class="text-sm font-semibold text-on-surface">Sweet or Salted Lassi</span>
+                  <span class="text-sm font-semibold text-on-surface" data-i18n="menu_lassi_title">Sweet or Salted Lassi</span>
                   <span class="text-secondary font-bold text-sm">₩4,500</span>
                 </div>
-                <p class="text-xs text-charcoal-muted mt-0.5">Traditional churned yogurt flavored with cardamom.</p>
+                <p class="text-xs text-charcoal-muted mt-0.5" data-i18n="menu_lassi_desc">Traditional churned yogurt flavored with cardamom.</p>
               </div>
             </div>
           </div>
@@ -704,9 +726,9 @@
         <!-- Section Header with Overview & Platform Verification -->
         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-2 border-b border-sand-border/60">
           <div class="space-y-2 max-w-2xl">
-            <span class="font-label-caps text-xs uppercase text-secondary tracking-widest font-bold">Patron Experiences &amp; Recognition</span>
-            <h2 class="font-headline-lg text-3xl lg:text-4xl text-primary font-semibold">What Guests Say About Varanasi</h2>
-            <p class="font-body-md text-sm text-charcoal-muted leading-relaxed">
+            <span class="font-label-caps text-xs uppercase text-secondary tracking-widest font-bold" data-i18n="reviews_eyebrow">Patron Experiences &amp; Recognition</span>
+            <h2 class="font-headline-lg text-3xl lg:text-4xl text-primary font-semibold" data-i18n="reviews_title">What Guests Say About Varanasi</h2>
+            <p class="font-body-md text-sm text-charcoal-muted leading-relaxed" data-i18n="reviews_desc">
               Real dining reflections from local Daegu residents, international expats, and travelers visiting Samdeok Rodeo Alley.
             </p>
           </div>
@@ -716,11 +738,11 @@
               <div class="flex text-secondary text-lg tracking-tight">★★★★★</div>
               <div class="border-l border-sand-border pl-3">
                 <span class="text-base font-bold text-primary block leading-none">4.9 / 5.0</span>
-                <span class="text-[11px] text-charcoal-muted font-medium">Over 200+ Verified Visits</span>
+                <span class="text-[11px] text-charcoal-muted font-medium" data-i18n="reviews_score_verified">Over 200+ Verified Visits</span>
               </div>
             </div>
             <a href="https://g.co/kgs/wMMFQgN" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-primary text-on-primary font-label-caps text-xs uppercase px-4 py-3 rounded-xl shadow-sm hover:bg-primary-container transition-all">
-              <span>View All Reviews</span>
+              <span data-i18n="reviews_btn_all">View All Reviews</span>
               <span class="material-symbols-outlined text-[16px]">open_in_new</span>
             </a>
           </div>
@@ -740,7 +762,7 @@
                   </div>
                   <div>
                     <h3 class="font-body-md text-sm font-bold text-primary leading-snug">Michael Thompson</h3>
-                    <p class="text-[11px] text-charcoal-muted font-medium">Daegu Expat Community</p>
+                    <p class="text-[11px] text-charcoal-muted font-medium" data-i18n="review1_sub">Daegu Expat Community</p>
                   </div>
                 </div>
                 <span class="text-xs text-secondary font-bold tracking-tight">5.0 ★</span>
@@ -748,10 +770,10 @@
 
               <!-- Review Headline & Text -->
               <div class="space-y-2">
-                <h4 class="font-headline-sm text-base text-primary font-semibold leading-snug">
+                <h4 class="font-headline-sm text-base text-primary font-semibold leading-snug" data-i18n="review1_headline">
                   The Most Authentic Butter Chicken in Daegu
                 </h4>
-                <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+                <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed" data-i18n="review1_text">
                   The depth of the makhani gravy is unmatched anywhere in the city. You immediately taste the stone-ground roasted spices and genuine tandoor char without any watery or sweet shortcuts.
                 </p>
               </div>
@@ -759,7 +781,7 @@
 
             <!-- Footer Meta -->
             <div class="pt-4 border-t border-sand-border/70 flex items-center justify-between text-[11px] text-charcoal-muted">
-              <span class="bg-surface-container px-2.5 py-1 rounded-md text-[10px] font-semibold text-primary">
+              <span class="bg-surface-container px-2.5 py-1 rounded-md text-[10px] font-semibold text-primary" data-i18n="review1_dishes">
                 Butter Chicken · Garlic Naan
               </span>
               <span class="font-medium text-emerald-800 flex items-center gap-1">
@@ -779,7 +801,7 @@
                   </div>
                   <div>
                     <h3 class="font-body-md text-sm font-bold text-primary leading-snug">Priya Sharma</h3>
-                    <p class="text-[11px] text-charcoal-muted font-medium">Visiting from Seoul</p>
+                    <p class="text-[11px] text-charcoal-muted font-medium" data-i18n="review2_sub">Visiting from Seoul</p>
                   </div>
                 </div>
                 <span class="text-xs text-secondary font-bold tracking-tight">5.0 ★</span>
@@ -787,10 +809,10 @@
 
               <!-- Review Headline & Text -->
               <div class="space-y-2">
-                <h4 class="font-headline-sm text-base text-primary font-semibold leading-snug">
+                <h4 class="font-headline-sm text-base text-primary font-semibold leading-snug" data-i18n="review2_headline">
                   Delhi Hospitality in Downtown Daegu
                 </h4>
-                <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+                <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed" data-i18n="review2_text">
                   Chef Dhyan personally made our table feel like honored guests. The spiced masala chai and fragrant saffron dum biryani transported me right back home. An absolute gem in Dongseong-ro.
                 </p>
               </div>
@@ -798,7 +820,7 @@
 
             <!-- Footer Meta -->
             <div class="pt-4 border-t border-sand-border/70 flex items-center justify-between text-[11px] text-charcoal-muted">
-              <span class="bg-surface-container px-2.5 py-1 rounded-md text-[10px] font-semibold text-primary">
+              <span class="bg-surface-container px-2.5 py-1 rounded-md text-[10px] font-semibold text-primary" data-i18n="review2_dishes">
                 Dum Biryani · Masala Chai
               </span>
               <span class="font-medium text-emerald-800 flex items-center gap-1">
@@ -818,7 +840,7 @@
                   </div>
                   <div>
                     <h3 class="font-body-md text-sm font-bold text-primary leading-snug">Kim Ji-woo (김지우)</h3>
-                    <p class="text-[11px] text-charcoal-muted font-medium">Jung-gu Local Resident</p>
+                    <p class="text-[11px] text-charcoal-muted font-medium" data-i18n="review3_sub">Jung-gu Local Resident</p>
                   </div>
                 </div>
                 <span class="text-xs text-secondary font-bold tracking-tight">5.0 ★</span>
@@ -826,10 +848,10 @@
 
               <!-- Review Headline & Text -->
               <div class="space-y-2">
-                <h4 class="font-headline-sm text-base text-primary font-semibold leading-snug">
+                <h4 class="font-headline-sm text-base text-primary font-semibold leading-snug" data-i18n="review3_headline">
                   Serene Date Spot with Convenient Parking
                 </h4>
-                <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+                <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed" data-i18n="review3_text">
                   A tranquil 2nd floor escape from the noisy streets. Ambient candlelight, authentic palak paneer, and the complimentary 1-hour parking with Naver review made the date evening effortless.
                 </p>
               </div>
@@ -837,7 +859,7 @@
 
             <!-- Footer Meta -->
             <div class="pt-4 border-t border-sand-border/70 flex items-center justify-between text-[11px] text-charcoal-muted">
-              <span class="bg-surface-container px-2.5 py-1 rounded-md text-[10px] font-semibold text-primary">
+              <span class="bg-surface-container px-2.5 py-1 rounded-md text-[10px] font-semibold text-primary" data-i18n="review3_dishes">
                 Palak Paneer · Samosas
               </span>
               <span class="font-medium text-emerald-800 flex items-center gap-1">
@@ -857,7 +879,7 @@
                   </div>
                   <div>
                     <h3 class="font-body-md text-sm font-bold text-primary leading-snug">Alexandre Laurent</h3>
-                    <p class="text-[11px] text-charcoal-muted font-medium">Culinary Enthusiast</p>
+                    <p class="text-[11px] text-charcoal-muted font-medium" data-i18n="review4_sub">Culinary Enthusiast</p>
                   </div>
                 </div>
                 <span class="text-xs text-secondary font-bold tracking-tight">5.0 ★</span>
@@ -865,10 +887,10 @@
 
               <!-- Review Headline & Text -->
               <div class="space-y-2">
-                <h4 class="font-headline-sm text-base text-primary font-semibold leading-snug">
+                <h4 class="font-headline-sm text-base text-primary font-semibold leading-snug" data-i18n="review4_headline">
                   Superior Clay Tandoor Breads &amp; Meat
                 </h4>
-                <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed">
+                <p class="font-body-sm text-xs text-on-surface-variant leading-relaxed" data-i18n="review4_text">
                   The tandoori chicken has a genuine wood-and-clay smoke char you rarely find in Korea. Paired with piping hot garlic naan straight from the oven, it was completely unforgettable.
                 </p>
               </div>
@@ -876,7 +898,7 @@
 
             <!-- Footer Meta -->
             <div class="pt-4 border-t border-sand-border/70 flex items-center justify-between text-[11px] text-charcoal-muted">
-              <span class="bg-surface-container px-2.5 py-1 rounded-md text-[10px] font-semibold text-primary">
+              <span class="bg-surface-container px-2.5 py-1 rounded-md text-[10px] font-semibold text-primary" data-i18n="review4_dishes">
                 Tandoori Chicken · Cheese Naan
               </span>
               <span class="font-medium text-emerald-800 flex items-center gap-1">
@@ -892,25 +914,25 @@
           <div class="grid grid-cols-3 gap-2 sm:gap-6 lg:gap-10 text-center md:text-left w-full md:w-auto">
             <div>
               <span class="font-headline-sm text-xl sm:text-2xl text-primary font-bold block">4.9 / 5.0</span>
-              <span class="text-[11px] sm:text-xs text-charcoal-muted">Patron Score</span>
+              <span class="text-[11px] sm:text-xs text-charcoal-muted" data-i18n="trust_patron_score">Patron Score</span>
             </div>
             <div class="border-x border-sand-border/70 px-2 sm:px-4">
               <span class="font-headline-sm text-xl sm:text-2xl text-primary font-bold block">98%</span>
-              <span class="text-[11px] sm:text-xs text-charcoal-muted">Recommend</span>
+              <span class="text-[11px] sm:text-xs text-charcoal-muted" data-i18n="trust_recommend">Recommend</span>
             </div>
             <div>
               <span class="font-headline-sm text-xl sm:text-2xl text-primary font-bold block">100%</span>
-              <span class="text-[11px] sm:text-xs text-charcoal-muted">Authentic</span>
+              <span class="text-[11px] sm:text-xs text-charcoal-muted" data-i18n="trust_authentic">Authentic</span>
             </div>
           </div>
 
           <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3 w-full md:w-auto shrink-0">
             <button type="button" class="btn-open-reserve w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 bg-primary text-on-primary font-label-caps text-xs uppercase px-5 py-2.5 rounded-lg hover:bg-primary-container transition-all">
               <span class="material-symbols-outlined text-[16px]">calendar_month</span>
-              <span>Reserve a Table</span>
+              <span data-i18n="trust_btn_reserve">Reserve a Table</span>
             </button>
             <a href="https://map.naver.com/v5/search/%EB%8C%80%EA%B5%AC%20%EB%B0%94%EB%9D%BC%EB%82%98%EC%8B%9C" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 bg-surface-container hover:bg-surface-container-high text-primary font-label-caps text-xs uppercase px-4 py-2.5 rounded-lg transition-all border border-sand-border">
-              <span>Naver Place Reviews</span>
+              <span data-i18n="trust_btn_naver">Naver Place Reviews</span>
             </a>
           </div>
         </div>
@@ -927,8 +949,8 @@
             
             <div class="lg:col-span-6 p-6 sm:p-8 lg:p-12 space-y-5 sm:space-y-6">
               <div>
-                <span class="font-label-caps text-xs uppercase text-secondary tracking-widest font-bold">Location &amp; Hours</span>
-                <h2 class="font-headline-lg text-2xl sm:text-3xl text-primary font-bold mt-1">Visit Varanasi Daegu</h2>
+                <span class="font-label-caps text-xs uppercase text-secondary tracking-widest font-bold" data-i18n="loc_eyebrow">Location &amp; Hours</span>
+                <h2 class="font-headline-lg text-2xl sm:text-3xl text-primary font-bold mt-1" data-i18n="loc_title">Visit Varanasi Daegu</h2>
               </div>
 
               <div class="space-y-4 text-sm">
@@ -936,10 +958,10 @@
                   <span class="material-symbols-outlined text-secondary text-xl mt-0.5">pin_drop</span>
                   <div>
                     <div class="flex items-center gap-3">
-                      <strong class="text-primary font-bold">Address</strong>
+                      <strong class="text-primary font-bold" data-i18n="loc_address_title">Address</strong>
                       <button type="button" class="btn-copy-address text-xs font-semibold text-secondary hover:underline flex items-center gap-1" data-address="대구광역시 중구 동성로5길 85, 2층">
                         <span class="material-symbols-outlined text-[14px]">content_copy</span>
-                        <span>Copy for Taxi</span>
+                        <span data-i18n="loc_copy_taxi">Copy for Taxi</span>
                       </button>
                     </div>
                     <p class="text-on-surface mt-0.5">2층, 85 Dongseong-ro 5-gil, Jung-gu, Daegu</p>
@@ -950,16 +972,16 @@
                 <div class="flex items-start gap-3">
                   <span class="material-symbols-outlined text-secondary text-xl mt-0.5">schedule</span>
                   <div>
-                    <strong class="text-primary font-bold">Hours</strong>
-                    <p class="text-on-surface mt-0.5">Daily 11:30 – 22:00 (Last Order 21:15)</p>
-                    <p class="text-error font-semibold text-xs">Closed Every Tuesday (화요일 정기 휴무)</p>
+                    <strong class="text-primary font-bold" data-i18n="loc_hours_title">Hours</strong>
+                    <p class="text-on-surface mt-0.5" data-i18n="loc_hours_val">Daily 11:30 – 22:00 (Last Order 21:15)</p>
+                    <p class="text-error font-semibold text-xs" data-i18n="loc_hours_closed">Closed Every Tuesday (화요일 정기 휴무)</p>
                   </div>
                 </div>
 
                 <div class="flex items-start gap-3">
                   <span class="material-symbols-outlined text-secondary text-xl mt-0.5">call</span>
                   <div>
-                    <strong class="text-primary font-bold">Phone</strong>
+                    <strong class="text-primary font-bold" data-i18n="loc_phone_title">Phone</strong>
                     <p><a href="tel:01097171118" class="text-primary font-bold hover:underline">+82 10-9717-1118</a></p>
                   </div>
                 </div>
@@ -967,8 +989,8 @@
                 <div class="flex items-start gap-3">
                   <span class="material-symbols-outlined text-secondary text-xl mt-0.5">local_parking</span>
                   <div>
-                    <strong class="text-primary font-bold">Parking Benefit</strong>
-                    <p class="text-charcoal-muted text-xs">1 Hour Free Parking with counter Naver Place review verification.</p>
+                    <strong class="text-primary font-bold" data-i18n="loc_parking_title">Parking Benefit</strong>
+                    <p class="text-charcoal-muted text-xs" data-i18n="loc_parking_val">1 Hour Free Parking with counter Naver Place review verification.</p>
                   </div>
                 </div>
               </div>
@@ -976,15 +998,15 @@
               <div class="flex flex-wrap gap-2.5 sm:gap-3 pt-2">
                 <a href="https://map.naver.com/v5/search/%EB%8C%80%EA%B5%AC%20%EB%B0%94%EB%9D%BC%EB%82%98%EC%8B%9C" target="_blank" rel="noopener noreferrer" class="min-h-[42px] inline-flex items-center gap-1.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-sm transition-all">
                   <span class="material-symbols-outlined text-[16px]">navigation</span>
-                  <span>Naver Map</span>
+                  <span data-i18n="loc_btn_naver">Naver Map</span>
                 </a>
                 <a href="https://maps.app.goo.gl/tG6rRJbqTVLbLr9d6" target="_blank" rel="noopener noreferrer" class="min-h-[42px] inline-flex items-center gap-1.5 bg-primary hover:bg-primary-container text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-sm transition-all">
                   <span class="material-symbols-outlined text-[16px]">map</span>
-                  <span>Google Maps</span>
+                  <span data-i18n="loc_btn_google">Google Maps</span>
                 </a>
                 <button type="button" class="btn-open-reserve min-h-[42px] inline-flex items-center gap-1.5 bg-secondary hover:bg-on-secondary-container text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition-all">
                   <span class="material-symbols-outlined text-[16px]">calendar_month</span>
-                  <span>Reserve Table</span>
+                  <span data-i18n="loc_btn_reserve">Reserve Table</span>
                 </button>
               </div>
 
@@ -1001,13 +1023,13 @@
               </iframe>
               <div class="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 bg-pure-cream/95 backdrop-blur-md p-3.5 sm:p-4 rounded-xl shadow-lg text-xs space-y-1 border border-sand-border max-w-[calc(100%-1.5rem)] sm:max-w-xs pointer-events-auto">
                 <div class="flex items-center justify-between gap-2">
-                  <span class="font-bold text-primary block">Arrival Landmark</span>
+                  <span class="font-bold text-primary block" data-i18n="loc_arrival_title">Arrival Landmark</span>
                   <a href="https://maps.app.goo.gl/tG6rRJbqTVLbLr9d6" target="_blank" rel="noopener noreferrer" class="text-[11px] text-secondary font-semibold hover:underline flex items-center gap-0.5">
-                    <span>Open Map</span>
+                    <span data-i18n="loc_open_map">Open Map</span>
                     <span class="material-symbols-outlined text-[13px]">open_in_new</span>
                   </a>
                 </div>
-                <p class="text-charcoal-muted text-[11px] sm:text-xs">Samdeok Fire Station Taxi Stand. Walk 30 paces into Rodeo Alley — look for the 2nd floor sign.</p>
+                <p class="text-charcoal-muted text-[11px] sm:text-xs" data-i18n="loc_arrival_desc">Samdeok Fire Station Taxi Stand. Walk 30 paces into Rodeo Alley — look for the 2nd floor sign.</p>
               </div>
             </div>
 
@@ -1026,7 +1048,7 @@
         <span class="font-headline-sm text-xl sm:text-2xl text-primary font-bold">VARANASI</span>
         <span class="text-xs text-secondary font-bold uppercase bg-secondary-fixed/50 px-2 py-0.5 rounded">바라나시 대구</span>
       </div>
-      <p class="text-xs text-charcoal-muted">
+      <p class="text-xs text-charcoal-muted" data-i18n="footer_copyright">
         © 2025 VARANASI. 2층, 85 Dongseong-ro 5-gil, Jung-gu, Daegu, South Korea.
       </p>
       <div class="flex flex-wrap justify-center gap-4 text-xs font-semibold">
@@ -1043,8 +1065,8 @@
       <!-- Modal Header -->
       <div class="flex items-center justify-between border-b border-sand-border pb-3.5">
         <div>
-          <span class="font-label-caps text-secondary text-xs uppercase font-bold tracking-wider">Varanasi Daegu</span>
-          <h2 id="modal-title" class="font-headline-sm text-xl sm:text-2xl text-primary font-bold">Reserve a Table</h2>
+          <span class="font-label-caps text-secondary text-xs uppercase font-bold tracking-wider" data-i18n="modal_brand">Varanasi Daegu</span>
+          <h2 id="modal-title" class="font-headline-sm text-xl sm:text-2xl text-primary font-bold" data-i18n="modal_title">Reserve a Table</h2>
         </div>
         <button type="button" class="btn-close-modal w-10 h-10 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full hover:bg-surface-container text-charcoal-muted transition-colors focus:outline-none" aria-label="Close modal">
           <span class="material-symbols-outlined text-[24px]">close</span>
@@ -1058,7 +1080,7 @@
           <div class="step-circle" aria-current="step">
             <span class="step-num">1</span>
           </div>
-          <span class="step-label">Details</span>
+          <span class="step-label" data-i18n="step_label_1">Details</span>
         </div>
 
         <div class="step-connector" data-connector="1"></div>
@@ -1068,7 +1090,7 @@
           <div class="step-circle">
             <span class="step-num">2</span>
           </div>
-          <span class="step-label">Reservation</span>
+          <span class="step-label" data-i18n="step_label_2">Reservation</span>
         </div>
 
         <div class="step-connector" data-connector="2"></div>
@@ -1078,7 +1100,7 @@
           <div class="step-circle">
             <span class="step-num">3</span>
           </div>
-          <span class="step-label">Time</span>
+          <span class="step-label" data-i18n="step_label_3">Time</span>
         </div>
 
         <div class="step-connector" data-connector="3"></div>
@@ -1088,7 +1110,7 @@
           <div class="step-circle">
             <span class="step-num">4</span>
           </div>
-          <span class="step-label">Review</span>
+          <span class="step-label" data-i18n="step_label_4">Review</span>
         </div>
       </div>
 
@@ -1098,37 +1120,37 @@
         <!-- STEP 1 — Your Details -->
         <div id="step-1-pane" class="step-pane active space-y-4" role="tabpanel" aria-labelledby="step-1-heading">
           <div>
-            <h3 id="step-1-heading" class="font-headline-sm text-base sm:text-lg text-primary font-bold">Let's Get to Know You</h3>
-            <p class="font-body-sm text-xs text-charcoal-muted mt-0.5">Who should we reserve the table for?</p>
+            <h3 id="step-1-heading" class="font-headline-sm text-base sm:text-lg text-primary font-bold" data-i18n="step1_h3">Let's Get to Know You</h3>
+            <p class="font-body-sm text-xs text-charcoal-muted mt-0.5" data-i18n="step1_sub">Who should we reserve the table for?</p>
           </div>
 
           <div class="space-y-3.5">
             <div>
-              <label for="guest-name" class="block text-xs text-primary uppercase font-semibold mb-1">Full Name <span class="text-error">*</span></label>
-              <input type="text" id="guest-name" name="guest-name" required placeholder="e.g. Michael / 김민준" class="form-input w-full px-3.5 py-2.5 min-h-[44px] rounded-lg bg-surface border border-sand-border text-base sm:text-sm text-on-surface focus:outline-none focus:border-primary transition-all" autocomplete="name"/>
+              <label for="guest-name" class="block text-xs text-primary uppercase font-semibold mb-1"><span data-i18n="label_name">Full Name</span> <span class="text-error">*</span></label>
+              <input type="text" id="guest-name" name="guest-name" required placeholder="e.g. Michael / 김민준" data-i18n-placeholder="placeholder_name" class="form-input w-full px-3.5 py-2.5 min-h-[44px] rounded-lg bg-surface border border-sand-border text-base sm:text-sm text-on-surface focus:outline-none focus:border-primary transition-all" autocomplete="name"/>
               <div id="error-name" class="inline-error hidden">
                 <span class="material-symbols-outlined text-[14px]">error</span>
-                <span>Please enter your full name (minimum 2 characters).</span>
+                <span data-i18n="error_name">Please enter your full name (minimum 2 characters).</span>
               </div>
             </div>
 
             <div>
-              <label for="guest-phone" class="block text-xs text-primary uppercase font-semibold mb-1">Phone Number <span class="text-error">*</span></label>
-              <input type="tel" id="guest-phone" name="guest-phone" required placeholder="010-XXXX-XXXX or +82..." class="form-input w-full px-3.5 py-2.5 min-h-[44px] rounded-lg bg-surface border border-sand-border text-base sm:text-sm text-on-surface focus:outline-none focus:border-primary transition-all" autocomplete="tel"/>
-              <span class="text-[11px] text-charcoal-muted block mt-1">Korean mobile (010) or international with country code (+XX)</span>
+              <label for="guest-phone" class="block text-xs text-primary uppercase font-semibold mb-1"><span data-i18n="label_phone">Phone Number</span> <span class="text-error">*</span></label>
+              <input type="tel" id="guest-phone" name="guest-phone" required placeholder="010-XXXX-XXXX or +82..." data-i18n-placeholder="placeholder_phone" class="form-input w-full px-3.5 py-2.5 min-h-[44px] rounded-lg bg-surface border border-sand-border text-base sm:text-sm text-on-surface focus:outline-none focus:border-primary transition-all" autocomplete="tel"/>
+              <span class="text-[11px] text-charcoal-muted block mt-1" data-i18n="sub_phone">Korean mobile (010) or international with country code (+XX)</span>
               <div id="error-phone" class="inline-error hidden">
                 <span class="material-symbols-outlined text-[14px]">error</span>
-                <span>Please enter a valid Korean (010-XXXX-XXXX) or international phone number.</span>
+                <span data-i18n="error_phone">Please enter a valid Korean (010-XXXX-XXXX) or international phone number.</span>
               </div>
             </div>
           </div>
 
           <div class="pt-2 flex items-center justify-between gap-3 border-t border-sand-border/70">
-            <button type="button" class="btn-cancel-modal min-h-[44px] px-4 py-2.5 rounded-lg text-charcoal-muted hover:bg-surface-container text-xs uppercase font-semibold transition-colors">
+            <button type="button" class="btn-cancel-modal min-h-[44px] px-4 py-2.5 rounded-lg text-charcoal-muted hover:bg-surface-container text-xs uppercase font-semibold transition-colors" data-i18n="btn_cancel">
               Cancel
             </button>
             <button type="button" id="btn-next-step-1" class="btn-step-next min-h-[44px] bg-primary text-on-primary hover:bg-primary-container px-6 py-2.5 rounded-lg text-xs uppercase font-semibold shadow-md transition-all flex items-center gap-1.5">
-              <span>Continue</span>
+              <span data-i18n="btn_continue">Continue</span>
               <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </button>
           </div>
@@ -1137,42 +1159,42 @@
         <!-- STEP 2 — Your Reservation -->
         <div id="step-2-pane" class="step-pane space-y-4" role="tabpanel" aria-labelledby="step-2-heading">
           <div>
-            <h3 id="step-2-heading" class="font-headline-sm text-base sm:text-lg text-primary font-bold">Plan Your Visit</h3>
-            <p class="font-body-sm text-xs text-charcoal-muted mt-0.5">Select party size and your preferred dining date.</p>
+            <h3 id="step-2-heading" class="font-headline-sm text-base sm:text-lg text-primary font-bold" data-i18n="step2_h3">Plan Your Visit</h3>
+            <p class="font-body-sm text-xs text-charcoal-muted mt-0.5" data-i18n="step2_sub">Select party size and your preferred dining date.</p>
           </div>
 
           <div class="space-y-3.5">
             <div>
-              <label for="guest-count" class="block text-xs text-primary uppercase font-semibold mb-1">Number of Guests <span class="text-error">*</span></label>
+              <label for="guest-count" class="block text-xs text-primary uppercase font-semibold mb-1"><span data-i18n="label_guests">Number of Guests</span> <span class="text-error">*</span></label>
               <select id="guest-count" name="guest-count" class="form-input w-full px-3.5 py-2.5 min-h-[44px] rounded-lg bg-surface border border-sand-border text-base sm:text-sm text-on-surface focus:outline-none focus:border-primary transition-all">
-                <option value="1">1 Person</option>
-                <option value="2" selected>2 Guests (Standard)</option>
-                <option value="3">3 Guests</option>
-                <option value="4">4 Guests</option>
-                <option value="5">5 Guests</option>
-                <option value="6">6 Guests</option>
-                <option value="7">7–8 Guests (Large Group)</option>
-                <option value="9+">9+ Guests (Private Dining Inquiry)</option>
+                <option value="1" data-i18n="guest_opt_1">1 Person</option>
+                <option value="2" selected data-i18n="guest_opt_2">2 Guests (Standard)</option>
+                <option value="3" data-i18n="guest_opt_3">3 Guests</option>
+                <option value="4" data-i18n="guest_opt_4">4 Guests</option>
+                <option value="5" data-i18n="guest_opt_5">5 Guests</option>
+                <option value="6" data-i18n="guest_opt_6">6 Guests</option>
+                <option value="7" data-i18n="guest_opt_7">7–8 Guests (Large Group)</option>
+                <option value="9+" data-i18n="guest_opt_9">9+ Guests (Private Dining Inquiry)</option>
               </select>
               <div id="error-guests" class="inline-error hidden">
                 <span class="material-symbols-outlined text-[14px]">error</span>
-                <span>Please select guest count.</span>
+                <span data-i18n="error_guests">Please select guest count.</span>
               </div>
             </div>
 
             <div>
-              <label for="res-date" class="block text-xs text-primary uppercase font-semibold mb-1">Reservation Date <span class="text-error">*</span></label>
+              <label for="res-date" class="block text-xs text-primary uppercase font-semibold mb-1"><span data-i18n="label_date">Reservation Date</span> <span class="text-error">*</span></label>
               <input type="date" id="res-date" name="res-date" required class="form-input w-full px-3.5 py-2.5 min-h-[44px] rounded-lg bg-surface border border-sand-border text-base sm:text-sm text-on-surface focus:outline-none focus:border-primary transition-all"/>
-              <span class="text-[11px] text-charcoal-muted block mt-1">Open Wed–Mon (11:30–22:00). Regular weekly rest: Tuesday.</span>
+              <span class="text-[11px] text-charcoal-muted block mt-1" data-i18n="sub_date">Open Wed–Mon (11:30–22:00). Regular weekly rest: Tuesday.</span>
               <div id="error-date" class="inline-error hidden">
                 <span class="material-symbols-outlined text-[14px]">error</span>
-                <span>Please select today or a future date.</span>
+                <span data-i18n="error_date">Please select today or a future date.</span>
               </div>
 
               <!-- Friendly Tuesday notice -->
               <div id="tuesday-alert" class="hidden text-xs bg-secondary-fixed/50 text-on-secondary-container p-2.5 rounded-lg border border-secondary-container/50 flex items-start gap-2 mt-2">
                 <span class="material-symbols-outlined text-sm shrink-0 mt-0.5">info</span>
-                <span>Notice: Tuesdays are our regular weekly rest day for kitchen prep. Requests for Tuesday will be specially reviewed by Chef Dhyan.</span>
+                <span data-i18n="alert_tuesday">Notice: Tuesdays are our regular weekly rest day for kitchen prep. Requests for Tuesday will be specially reviewed by Chef Dhyan.</span>
               </div>
             </div>
           </div>
@@ -1180,10 +1202,10 @@
           <div class="pt-2 flex items-center justify-between gap-3 border-t border-sand-border/70">
             <button type="button" id="btn-back-step-2" class="btn-step-prev min-h-[44px] px-4 py-2.5 rounded-lg text-charcoal-muted hover:bg-surface-container text-xs uppercase font-semibold transition-colors flex items-center gap-1">
               <span class="material-symbols-outlined text-sm">arrow_back</span>
-              <span>Back</span>
+              <span data-i18n="btn_back">Back</span>
             </button>
             <button type="button" id="btn-next-step-2" class="btn-step-next min-h-[44px] bg-primary text-on-primary hover:bg-primary-container px-6 py-2.5 rounded-lg text-xs uppercase font-semibold shadow-md transition-all flex items-center gap-1.5">
-              <span>Continue</span>
+              <span data-i18n="btn_continue">Continue</span>
               <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </button>
           </div>
@@ -1192,8 +1214,8 @@
         <!-- STEP 3 — Choose Your Time -->
         <div id="step-3-pane" class="step-pane space-y-4" role="tabpanel" aria-labelledby="step-3-heading">
           <div>
-            <h3 id="step-3-heading" class="font-headline-sm text-base sm:text-lg text-primary font-bold">When Would You Like to Visit?</h3>
-            <p class="font-body-sm text-xs text-charcoal-muted mt-0.5">Select an available dining seating slot.</p>
+            <h3 id="step-3-heading" class="font-headline-sm text-base sm:text-lg text-primary font-bold" data-i18n="step3_h3">When Would You Like to Visit?</h3>
+            <p class="font-body-sm text-xs text-charcoal-muted mt-0.5" data-i18n="step3_sub">Select an available dining seating slot.</p>
           </div>
 
           <!-- Hidden storage for chosen time -->
@@ -1202,7 +1224,7 @@
           <div class="space-y-3.5">
             <!-- Lunch Slots -->
             <div>
-              <span class="block text-xs text-primary uppercase font-bold tracking-wider mb-2">Lunch Service (11:30 AM – 3:00 PM)</span>
+              <span class="block text-xs text-primary uppercase font-bold tracking-wider mb-2" data-i18n="service_lunch">Lunch Service (11:30 AM – 3:00 PM)</span>
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" role="group" aria-label="Lunch times">
                 <button type="button" class="time-chip" data-time="12:00">
                   <span class="material-symbols-outlined text-xs">schedule</span>
@@ -1225,7 +1247,7 @@
 
             <!-- Dinner Slots -->
             <div>
-              <span class="block text-xs text-primary uppercase font-bold tracking-wider mb-2">Dinner Service (5:00 PM – 10:00 PM)</span>
+              <span class="block text-xs text-primary uppercase font-bold tracking-wider mb-2" data-i18n="service_dinner">Dinner Service (5:00 PM – 10:00 PM)</span>
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" role="group" aria-label="Dinner times">
                 <button type="button" class="time-chip" data-time="17:30">
                   <span class="material-symbols-outlined text-xs">schedule</span>
@@ -1260,17 +1282,17 @@
 
             <div id="error-time" class="inline-error hidden">
               <span class="material-symbols-outlined text-[14px]">error</span>
-              <span>Please select a seating time slot.</span>
+              <span data-i18n="error_time">Please select a seating time slot.</span>
             </div>
           </div>
 
           <div class="pt-2 flex items-center justify-between gap-3 border-t border-sand-border/70">
             <button type="button" id="btn-back-step-3" class="btn-step-prev min-h-[44px] px-4 py-2.5 rounded-lg text-charcoal-muted hover:bg-surface-container text-xs uppercase font-semibold transition-colors flex items-center gap-1">
               <span class="material-symbols-outlined text-sm">arrow_back</span>
-              <span>Back</span>
+              <span data-i18n="btn_back">Back</span>
             </button>
             <button type="button" id="btn-next-step-3" class="btn-step-next min-h-[44px] bg-primary text-on-primary hover:bg-primary-container px-6 py-2.5 rounded-lg text-xs uppercase font-semibold shadow-md transition-all flex items-center gap-1.5">
-              <span>Continue</span>
+              <span data-i18n="btn_continue">Continue</span>
               <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </button>
           </div>
@@ -1279,8 +1301,8 @@
         <!-- STEP 4 — Review & Confirm -->
         <div id="step-4-pane" class="step-pane space-y-4" role="tabpanel" aria-labelledby="step-4-heading">
           <div>
-            <h3 id="step-4-heading" class="font-headline-sm text-base sm:text-lg text-primary font-bold">Review Your Reservation</h3>
-            <p class="font-body-sm text-xs text-charcoal-muted mt-0.5">Please verify your details before submitting your request.</p>
+            <h3 id="step-4-heading" class="font-headline-sm text-base sm:text-lg text-primary font-bold" data-i18n="step4_h3">Review Your Reservation</h3>
+            <p class="font-body-sm text-xs text-charcoal-muted mt-0.5" data-i18n="step4_sub">Please verify your details before submitting your request.</p>
           </div>
 
           <!-- Summary Card -->
@@ -1290,12 +1312,12 @@
               <div class="flex items-start gap-2.5">
                 <span class="material-symbols-outlined text-primary text-lg mt-0.5">person</span>
                 <div>
-                  <span class="text-[11px] text-charcoal-muted uppercase font-semibold tracking-wider block">Guest Details</span>
+                  <span class="text-[11px] text-charcoal-muted uppercase font-semibold tracking-wider block" data-i18n="review_title_guest">Guest Details</span>
                   <div id="review-guest-name" class="font-bold text-primary text-sm">Michael</div>
                   <div id="review-guest-phone" class="text-xs text-charcoal-muted font-medium">010-1234-5678</div>
                 </div>
               </div>
-              <button type="button" class="btn-edit-step text-xs text-secondary hover:text-primary font-semibold underline p-2 min-h-[36px] flex items-center transition-colors" data-jump-to="1">
+              <button type="button" class="btn-edit-step text-xs text-secondary hover:text-primary font-semibold underline p-2 min-h-[36px] flex items-center transition-colors" data-jump-to="1" data-i18n="btn_edit">
                 Edit
               </button>
             </div>
@@ -1305,12 +1327,12 @@
               <div class="flex items-start gap-2.5">
                 <span class="material-symbols-outlined text-primary text-lg mt-0.5">calendar_month</span>
                 <div>
-                  <span class="text-[11px] text-charcoal-muted uppercase font-semibold tracking-wider block">Table & Date</span>
+                  <span class="text-[11px] text-charcoal-muted uppercase font-semibold tracking-wider block" data-i18n="review_title_table">Table & Date</span>
                   <div id="review-party-size" class="font-bold text-primary text-sm">2 Guests</div>
                   <div id="review-date-formatted" class="text-xs text-charcoal-muted font-medium">Today</div>
                 </div>
               </div>
-              <button type="button" class="btn-edit-step text-xs text-secondary hover:text-primary font-semibold underline p-2 min-h-[36px] flex items-center transition-colors" data-jump-to="2">
+              <button type="button" class="btn-edit-step text-xs text-secondary hover:text-primary font-semibold underline p-2 min-h-[36px] flex items-center transition-colors" data-jump-to="2" data-i18n="btn_edit">
                 Edit
               </button>
             </div>
@@ -1320,11 +1342,11 @@
               <div class="flex items-start gap-2.5">
                 <span class="material-symbols-outlined text-primary text-lg mt-0.5">schedule</span>
                 <div>
-                  <span class="text-[11px] text-charcoal-muted uppercase font-semibold tracking-wider block">Seating Time</span>
+                  <span class="text-[11px] text-charcoal-muted uppercase font-semibold tracking-wider block" data-i18n="review_title_time">Seating Time</span>
                   <div id="review-time-slot" class="font-bold text-primary text-sm">7:00 PM (Dinner)</div>
                 </div>
               </div>
-              <button type="button" class="btn-edit-step text-xs text-secondary hover:text-primary font-semibold underline p-2 min-h-[36px] flex items-center transition-colors" data-jump-to="3">
+              <button type="button" class="btn-edit-step text-xs text-secondary hover:text-primary font-semibold underline p-2 min-h-[36px] flex items-center transition-colors" data-jump-to="3" data-i18n="btn_edit">
                 Edit
               </button>
             </div>
@@ -1333,19 +1355,19 @@
           <!-- Note -->
           <div class="bg-surface-container/70 p-3 rounded-lg border border-sand-border/80 text-[11px] text-charcoal-muted flex items-start gap-2">
             <span class="material-symbols-outlined text-sm text-secondary shrink-0 mt-0.5">verified_user</span>
-            <span>Submitting this request holds your table inquiry. Chef Dhyan and our host team will review availability and confirm shortly via SMS.</span>
+            <span data-i18n="review_notice">Submitting this request holds your table inquiry. Chef Dhyan and our host team will review availability and confirm shortly via SMS.</span>
           </div>
 
           <!-- Submission Error Container -->
           <div id="submission-error" class="hidden text-xs bg-red-50 text-error border border-red-200 p-3 rounded-lg flex items-center gap-2">
             <span class="material-symbols-outlined text-sm shrink-0">error</span>
-            <span id="submission-error-msg">Failed to submit reservation. Please try again.</span>
+            <span id="submission-error-msg" data-i18n="submit_error">Failed to submit reservation. Please try again.</span>
           </div>
 
           <div class="pt-2 flex flex-col-reverse sm:flex-row items-center justify-between gap-2.5 sm:gap-4 border-t border-sand-border/70">
             <button type="button" id="btn-back-step-4" class="btn-step-prev w-full sm:w-auto min-h-[44px] justify-center px-4 py-2.5 rounded-lg text-charcoal-muted hover:bg-surface-container text-xs uppercase font-semibold transition-colors flex items-center gap-1">
               <span class="material-symbols-outlined text-sm">arrow_back</span>
-              <span>Back</span>
+              <span data-i18n="btn_back">Back</span>
             </button>
             <button type="submit" id="btn-confirm-booking" class="w-full sm:w-auto min-h-[44px] justify-center bg-primary text-on-primary hover:bg-primary-container px-6 py-2.5 rounded-lg text-xs uppercase font-semibold shadow-md transition-all flex items-center gap-2">
               <span id="confirm-spinner" class="hidden">
@@ -1354,7 +1376,7 @@
                   <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
                 </svg>
               </span>
-              <span id="confirm-btn-label">Confirm Reservation</span>
+              <span id="confirm-btn-label" data-i18n="btn_confirm">Confirm Reservation</span>
               <span id="confirm-arrow-icon" class="material-symbols-outlined text-sm">check_circle</span>
             </button>
           </div>
@@ -1369,47 +1391,47 @@
         </div>
 
         <div>
-          <span class="font-label-caps text-secondary text-xs uppercase font-bold tracking-wider">Varanasi Daegu</span>
-          <h3 class="font-headline-sm text-2xl text-primary font-bold mt-0.5">Reservation Request Received</h3>
-          <p class="font-body-sm text-xs text-charcoal-muted mt-1 max-w-sm mx-auto">
+          <span class="font-label-caps text-secondary text-xs uppercase font-bold tracking-wider" data-i18n="modal_brand">Varanasi Daegu</span>
+          <h3 class="font-headline-sm text-2xl text-primary font-bold mt-0.5" data-i18n="success_h3">Reservation Request Received</h3>
+          <p class="font-body-sm text-xs text-charcoal-muted mt-1 max-w-sm mx-auto" data-i18n="success_p">
             Thank you! Chef Dhyan and our hospitality team have received your booking request.
           </p>
         </div>
 
         <!-- Reference Code Box -->
         <div class="bg-surface-container p-3 rounded-xl border border-sand-border inline-block px-6">
-          <span class="text-[10px] text-charcoal-muted uppercase font-bold tracking-wider block">Booking Reference</span>
+          <span class="text-[10px] text-charcoal-muted uppercase font-bold tracking-wider block" data-i18n="success_ref_label">Booking Reference</span>
           <span id="confirmed-booking-id" class="font-mono text-lg font-bold text-primary tracking-wider">VRN-849201</span>
         </div>
 
         <!-- Summary Details Card -->
         <div class="bg-warm-ivory/80 border border-sand-border rounded-xl p-4 text-left text-xs space-y-2 max-w-sm mx-auto">
           <div class="flex justify-between border-b border-sand-border/50 pb-1.5">
-            <span class="text-charcoal-muted">Guest:</span>
+            <span class="text-charcoal-muted" data-i18n="success_guest_label">Guest:</span>
             <span id="confirmed-guest" class="font-semibold text-primary">Michael</span>
           </div>
           <div class="flex justify-between border-b border-sand-border/50 pb-1.5">
-            <span class="text-charcoal-muted">Party Size:</span>
+            <span class="text-charcoal-muted" data-i18n="success_party_label">Party Size:</span>
             <span id="confirmed-party" class="font-semibold text-primary">2 Guests</span>
           </div>
           <div class="flex justify-between border-b border-sand-border/50 pb-1.5">
-            <span class="text-charcoal-muted">Date & Time:</span>
+            <span class="text-charcoal-muted" data-i18n="success_datetime_label">Date & Time:</span>
             <span id="confirmed-datetime" class="font-semibold text-primary">Oct 10, 2026 at 7:00 PM</span>
           </div>
           <div class="flex justify-between">
-            <span class="text-charcoal-muted">Phone:</span>
+            <span class="text-charcoal-muted" data-i18n="success_phone_label">Phone:</span>
             <span id="confirmed-phone" class="font-semibold text-primary">010-1234-5678</span>
           </div>
         </div>
 
         <!-- Notification Advisory -->
         <p class="text-[11px] text-charcoal-muted max-w-sm mx-auto">
-          An SMS confirmation has been dispatched. For immediate assistance or special dining inquiries, contact us directly at
+          <span data-i18n="success_advisory">An SMS confirmation has been dispatched. For immediate assistance or special dining inquiries, contact us directly at</span>
           <a href="tel:+821097171118" class="text-primary font-bold underline">+82 10-9717-1118</a>.
         </p>
 
         <div class="pt-2">
-          <button type="button" id="btn-success-close" class="w-full sm:w-auto min-h-[44px] bg-primary text-on-primary hover:bg-primary-container px-8 py-2.5 rounded-lg text-xs uppercase font-semibold shadow-md transition-all">
+          <button type="button" id="btn-success-close" class="w-full sm:w-auto min-h-[44px] bg-primary text-on-primary hover:bg-primary-container px-8 py-2.5 rounded-lg text-xs uppercase font-semibold shadow-md transition-all" data-i18n="btn_done">
             Done
           </button>
         </div>
@@ -1434,7 +1456,8 @@
     <span class="material-symbols-outlined text-[20px]">arrow_upward</span>
   </button>
 
-  <!-- Application Logic -->
-  <script src="app.js"></script>
+  <!-- Internationalization Translations & Application Logic -->
+  <script src="translations.js?v=2.1"></script>
+  <script src="app.js?v=2.1"></script>
 </body>
 </html>

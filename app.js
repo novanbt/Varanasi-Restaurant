@@ -3,7 +3,156 @@
  * Dongseong-ro, Daegu, South Korea
  */
 
+/* --------------------------------------------------------------------------
+   0. Bilingual Internationalization System (English & Korean)
+   -------------------------------------------------------------------------- */
+let currentLang = 'en';
+let updateBusinessStatus = null;
+let updateHeroVideoUI = null;
+
+function getInitialLanguage() {
+  const saved = localStorage.getItem('varanasi_lang');
+  if (saved === 'en' || saved === 'ko') {
+    return saved;
+  }
+  // Automatic Korean detection if user has Korean language browser setting
+  if (typeof navigator !== 'undefined' && navigator.language && navigator.language.toLowerCase().startsWith('ko')) {
+    return 'ko';
+  }
+  // Default to English
+  return 'en';
+}
+
+function getTranslationDictionary(lang) {
+  if (typeof window !== 'undefined' && window.TRANSLATIONS && window.TRANSLATIONS[lang]) {
+    return window.TRANSLATIONS[lang];
+  }
+  if (typeof TRANSLATIONS !== 'undefined' && TRANSLATIONS[lang]) {
+    return TRANSLATIONS[lang];
+  }
+  return null;
+}
+
+function t(key, fallback = '') {
+  const dict = getTranslationDictionary(currentLang) || getTranslationDictionary('en');
+  if (dict && dict[key] !== undefined) {
+    return dict[key];
+  }
+  return fallback || key;
+}
+
+function applyLanguage(lang) {
+  currentLang = lang;
+  
+  // 1. Set html lang attribute dynamically
+  document.documentElement.lang = lang;
+
+  const dict = getTranslationDictionary(lang);
+  if (!dict) {
+    console.warn(`Translation dictionary for "${lang}" not found.`);
+  }
+
+  // 2. Update Document Title and Meta Description
+  if (dict) {
+    if (dict.meta_title) document.title = dict.meta_title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && dict.meta_desc) metaDesc.setAttribute('content', dict.meta_desc);
+  }
+
+  // 3. Update Language Toggle Button labels
+  // When English is active, show 한국어; when Korean is active, show English
+  const desktopToggleText = document.getElementById('lang-toggle-text');
+  const desktopToggleBtn = document.getElementById('lang-toggle-btn');
+  const mobileToggleText = document.getElementById('mobile-lang-toggle-text');
+  const mobileToggleBtn = document.getElementById('mobile-lang-toggle-btn');
+
+  const nextLabel = lang === 'en' ? '한국어' : 'English';
+  const ariaLabel = lang === 'en' ? t('toggle_aria_to_ko', 'Switch language to Korean') : t('toggle_aria_to_en', 'Switch language to English');
+
+  if (desktopToggleText) desktopToggleText.textContent = nextLabel;
+  if (desktopToggleBtn) desktopToggleBtn.setAttribute('aria-label', ariaLabel);
+
+  if (mobileToggleText) mobileToggleText.textContent = nextLabel;
+  if (mobileToggleBtn) mobileToggleBtn.setAttribute('aria-label', ariaLabel);
+
+  // 4. Translate all text elements: [data-i18n]
+  if (dict) {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) {
+        el.textContent = dict[key];
+      }
+    });
+
+    // 5. Translate all rich HTML elements: [data-i18n-html]
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      if (dict[key] !== undefined) {
+        el.innerHTML = dict[key];
+      }
+    });
+
+    // 6. Translate all placeholder elements: [data-i18n-placeholder]
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (dict[key] !== undefined) {
+        el.placeholder = dict[key];
+      }
+    });
+
+    // 7. Translate all ARIA labels: [data-i18n-aria]
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const key = el.getAttribute('data-i18n-aria');
+      if (dict[key] !== undefined) {
+        el.setAttribute('aria-label', dict[key]);
+      }
+    });
+  }
+
+  // 8. Re-render dynamic components
+  if (typeof updateBusinessStatus === 'function') {
+    updateBusinessStatus();
+  }
+  if (typeof updateHeroVideoUI === 'function') {
+    updateHeroVideoUI();
+  }
+  if (typeof window.updateReservationSummaryI18n === 'function') {
+    window.updateReservationSummaryI18n();
+  }
+}
+
+function toggleLanguage() {
+  const nextLang = currentLang === 'en' ? 'ko' : 'en';
+  localStorage.setItem('varanasi_lang', nextLang);
+  applyLanguage(nextLang);
+}
+
+function initI18n() {
+  currentLang = getInitialLanguage();
+
+  const desktopToggleBtn = document.getElementById('lang-toggle-btn');
+  const mobileToggleBtn = document.getElementById('mobile-lang-toggle-btn');
+
+  if (desktopToggleBtn) {
+    desktopToggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleLanguage();
+    });
+  }
+
+  if (mobileToggleBtn) {
+    mobileToggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleLanguage();
+    });
+  }
+
+  // Apply chosen language to entire DOM
+  applyLanguage(currentLang);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  initI18n();
   initHeroVideo();
   initBusinessStatus();
   initMenuFilter();
@@ -22,7 +171,7 @@ function initBusinessStatus() {
   const statusEl = document.getElementById('live-status-pill');
   if (!statusEl) return;
 
-  function updateStatus() {
+  updateBusinessStatus = function() {
     try {
       // Get current time in South Korea (KST - UTC+9)
       const now = new Date();
@@ -43,30 +192,32 @@ function initBusinessStatus() {
       if (isTuesday) {
         statusEl.innerHTML = `
           <span class="pulse-indicator closed"></span>
-          <span class="font-label-caps text-xs text-error font-medium">Closed Today (Tue)</span>
+          <span class="font-label-caps text-xs text-error font-medium">${t('status_tuesday', 'Closed Today (Tue)')}</span>
         `;
       } else if (isOpen) {
         statusEl.innerHTML = `
           <span class="pulse-indicator open"></span>
-          <span class="font-label-caps text-xs text-emerald-800 font-semibold">Open Now (Until 22:00 KST)</span>
+          <span class="font-label-caps text-xs text-emerald-800 font-semibold">${t('status_open', 'Open Now (Until 22:00 KST)')}</span>
         `;
       } else {
-        const nextTime = timeInMinutes < openMinutes ? 'Opens 11:30 AM' : 'Opens Tomorrow 11:30 AM';
+        const nextTime = timeInMinutes < openMinutes 
+          ? t('status_closed_opens', 'Closed · Opens 11:30 AM') 
+          : t('status_closed_tomorrow', 'Closed · Opens Tomorrow 11:30 AM');
         statusEl.innerHTML = `
           <span class="pulse-indicator closed"></span>
-          <span class="font-label-caps text-xs text-charcoal-muted font-medium">Closed · ${nextTime}</span>
+          <span class="font-label-caps text-xs text-charcoal-muted font-medium">${nextTime}</span>
         `;
       }
     } catch (e) {
       statusEl.innerHTML = `
         <span class="pulse-indicator open"></span>
-        <span class="font-label-caps text-xs text-secondary font-medium">Daily 11:30 – 22:00 (Tue Closed)</span>
+        <span class="font-label-caps text-xs text-secondary font-medium">${t('drawer_hours', 'Daily 11:30 – 22:00 (Tue Closed)')}</span>
       `;
     }
-  }
+  };
 
-  updateStatus();
-  setInterval(updateStatus, 60000); // refresh every minute
+  updateBusinessStatus();
+  setInterval(updateBusinessStatus, 60000); // refresh every minute
 }
 
 /* --------------------------------------------------------------------------
@@ -174,12 +325,21 @@ function initReservationModal() {
   };
 
   // Helper: Format Date for readable display
+  // Helper: Format Date for readable display
   function formatDateReadable(dateStr) {
-    if (!dateStr) return 'Selected Date';
+    if (!dateStr) return currentLang === 'ko' ? '선택된 날짜' : 'Selected Date';
     try {
       const parts = dateStr.split('-');
       if (parts.length === 3) {
         const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+        if (currentLang === 'ko') {
+          return d.toLocaleDateString('ko-KR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            weekday: 'short'
+          });
+        }
         return d.toLocaleDateString('en-US', {
           weekday: 'short',
           month: 'short',
@@ -242,7 +402,7 @@ function initReservationModal() {
   function validatePhoneNumber(phone) {
     const trimmed = (phone || '').trim();
     if (!trimmed) {
-      return { valid: false, message: 'Please enter your phone number.' };
+      return { valid: false, message: t('error_phone', 'Please enter your phone number.') };
     }
     const cleaned = trimmed.replace(/[\s\-\(\)\.]/g, '');
     const isKorean = /^(01[016789]\d{7,8}|0[2-6]\d{7,8})$/.test(cleaned);
@@ -251,7 +411,7 @@ function initReservationModal() {
     if (!isKorean && !isInternational) {
       return {
         valid: false,
-        message: 'Please enter a valid Korean (010-XXXX-XXXX) or international (+XX...) phone number.'
+        message: t('error_phone', 'Please enter a valid Korean (010-XXXX-XXXX) or international (+XX...) phone number.')
       };
     }
     return { valid: true };
@@ -371,18 +531,39 @@ function initReservationModal() {
 
   // Update Review Card Summary values
   function updateReviewSummary() {
-    if (reviewName) reviewName.textContent = wizardState.name || 'Guest';
+    if (reviewName) reviewName.textContent = wizardState.name || (currentLang === 'ko' ? '예약자' : 'Guest');
     if (reviewPhone) reviewPhone.textContent = wizardState.phone || '—';
     if (reviewParty) {
       const g = wizardState.guests;
-      reviewParty.textContent = g === '1' ? '1 Person' : `${g} Guests`;
+      reviewParty.textContent = g === '1' 
+        ? t('person_unit_single', '1 Person') 
+        : t('person_unit_multi', '{n} Guests').replace('{n}', g);
     }
     if (reviewDate) reviewDate.textContent = formatDateReadable(wizardState.date);
     if (reviewTime) {
       const isLunchTime = ['12:00', '12:30', '13:00', '13:30'].includes(wizardState.time);
-      reviewTime.textContent = `${wizardState.timeLabel} (${isLunchTime ? 'Lunch Service' : 'Dinner Service'})`;
+      const serviceLabel = isLunchTime ? t('lunch_service_label', 'Lunch Service') : t('dinner_service_label', 'Dinner Service');
+      reviewTime.textContent = `${wizardState.timeLabel} (${serviceLabel})`;
     }
   }
+
+  window.updateReservationSummaryI18n = function() {
+    if (wizardState.currentStep === 4) {
+      updateReviewSummary();
+    }
+    if (wizardState.isCompleted) {
+      const datetimeEl = document.getElementById('confirmed-datetime');
+      const partyEl = document.getElementById('confirmed-party');
+      if (partyEl) {
+        const g = wizardState.guests;
+        partyEl.textContent = g === '1' ? t('person_unit_single', '1 Person') : t('person_unit_multi', '{n} Guests').replace('{n}', g);
+      }
+      if (datetimeEl) {
+        const d = formatDateReadable(wizardState.date);
+        datetimeEl.textContent = currentLang === 'ko' ? `${d} ${wizardState.timeLabel}` : `${d} at ${wizardState.timeLabel}`;
+      }
+    }
+  };
 
   // Step 1 validation
   function validateStep1() {
@@ -391,7 +572,7 @@ function initReservationModal() {
     const phoneVal = (phoneInput?.value || '').trim();
 
     if (!nameVal || nameVal.length < 2) {
-      showFieldError(nameInput, errorName, 'Please enter your full name (minimum 2 characters).');
+      showFieldError(nameInput, errorName, t('error_name', 'Please enter your full name (minimum 2 characters).'));
       isValid = false;
     } else {
       clearFieldError(nameInput, errorName);
@@ -417,7 +598,7 @@ function initReservationModal() {
     const dateVal = dateInput?.value;
 
     if (!guestsVal) {
-      showFieldError(guestsSelect, errorGuests, 'Please select guest count.');
+      showFieldError(guestsSelect, errorGuests, t('error_guests', 'Please select guest count.'));
       isValid = false;
     } else {
       clearFieldError(guestsSelect, errorGuests);
@@ -425,7 +606,7 @@ function initReservationModal() {
     }
 
     if (!dateVal) {
-      showFieldError(dateInput, errorDate, 'Please select a reservation date.');
+      showFieldError(dateInput, errorDate, t('error_date', 'Please select a reservation date.'));
       isValid = false;
     } else {
       const selected = new Date(dateVal + 'T00:00:00');
@@ -433,7 +614,7 @@ function initReservationModal() {
       today.setHours(0, 0, 0, 0);
 
       if (selected < today) {
-        showFieldError(dateInput, errorDate, 'Reservation date cannot be in the past.');
+        showFieldError(dateInput, errorDate, t('error_date', 'Reservation date cannot be in the past.'));
         isValid = false;
       } else {
         clearFieldError(dateInput, errorDate);
@@ -515,18 +696,24 @@ function initReservationModal() {
     if (guestEl) guestEl.textContent = reservation.name || wizardState.name;
     if (partyEl) {
       const g = reservation.guests || wizardState.guests;
-      partyEl.textContent = g === '1' ? '1 Person' : `${g} Guests`;
+      partyEl.textContent = g === '1' ? t('person_unit_single', '1 Person') : t('person_unit_multi', '{n} Guests').replace('{n}', g);
     }
     if (datetimeEl) {
       const d = formatDateReadable(reservation.date || wizardState.date);
-      datetimeEl.textContent = `${d} at ${wizardState.timeLabel}`;
+      datetimeEl.textContent = currentLang === 'ko' ? `${d} ${wizardState.timeLabel}` : `${d} at ${wizardState.timeLabel}`;
     }
     if (phoneEl) phoneEl.textContent = reservation.phone || wizardState.phone;
 
     wizardState.isCompleted = true;
 
     // Toast notification for overall confirmation
-    showToast(`Reservation request received for ${wizardState.name} (${wizardState.guests} guests) on ${wizardState.date} at ${wizardState.timeLabel}. Reference: ${bookingId}`);
+    const successMsg = t('toast_booking_success', 'Reservation request received for {name} ({guests} guests) on {date} at {time}. Reference: {id}')
+      .replace('{name}', wizardState.name)
+      .replace('{guests}', wizardState.guests)
+      .replace('{date}', wizardState.date)
+      .replace('{time}', wizardState.timeLabel)
+      .replace('{id}', bookingId);
+    showToast(successMsg);
   }
 
   // Form submission handler
@@ -559,7 +746,7 @@ function initReservationModal() {
       if (btnConfirm) btnConfirm.disabled = true;
       if (spinner) spinner.classList.remove('hidden');
       if (arrowIcon) arrowIcon.classList.add('hidden');
-      if (btnLabel) btnLabel.textContent = 'Submitting Request...';
+      if (btnLabel) btnLabel.textContent = t('submitting_label', 'Submitting Request...');
       if (submissionError) submissionError.classList.add('hidden');
 
       const payload = {
@@ -593,7 +780,7 @@ function initReservationModal() {
         if (btnConfirm) btnConfirm.disabled = false;
         if (spinner) spinner.classList.add('hidden');
         if (arrowIcon) arrowIcon.classList.remove('hidden');
-        if (btnLabel) btnLabel.textContent = 'Confirm Reservation';
+        if (btnLabel) btnLabel.textContent = t('btn_confirm', 'Confirm Reservation');
       }
     });
   }
@@ -842,9 +1029,9 @@ function initAddressCopy() {
     btn.addEventListener('click', () => {
       const textToCopy = btn.getAttribute('data-address') || '대구광역시 중구 동성로5길 85, 2층 (바라나시)';
       navigator.clipboard.writeText(textToCopy).then(() => {
-        showToast(`Address copied to clipboard: "${textToCopy}" (Ready for Taxi / Maps)`);
+        showToast(t('toast_address_copied', `Address copied to clipboard: "${textToCopy}" (Ready for Taxi / Maps)`));
       }).catch(() => {
-        showToast('Address: 대구광역시 중구 동성로5길 85, 2층');
+        showToast(`Address: ${textToCopy}`);
       });
     });
   });
@@ -942,47 +1129,75 @@ function initHeroVideo() {
   const label = document.getElementById('hero-video-text');
   if (!video) return;
 
-  // Guarantee muted property for mobile and desktop autoplay policy
+  // Guarantee muted and inline playback for mobile/desktop autoplay policy
   video.muted = true;
+  video.defaultMuted = true;
+  video.playsInline = true;
 
-  const tryPlay = () => {
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          if (toggleBtn && icon && label) {
-            icon.textContent = 'pause';
-            label.textContent = 'Pause Video';
-            toggleBtn.setAttribute('aria-label', 'Pause background video');
-          }
-        })
-        .catch(() => {
-          // Autoplay was restricted by browser policy; user can click to play
-          if (toggleBtn && icon && label) {
-            icon.textContent = 'play_arrow';
-            label.textContent = 'Play Video';
-            toggleBtn.setAttribute('aria-label', 'Play background video');
-          }
-        });
+  let userExplicitlyPaused = false;
+
+  const updateUI = (isPlaying) => {
+    if (!toggleBtn || !icon || !label) return;
+    if (isPlaying) {
+      icon.textContent = 'pause';
+      label.textContent = t('hero_video_pause', 'Pause Video');
+      toggleBtn.setAttribute('aria-label', t('hero_video_pause', 'Pause background video'));
+    } else {
+      icon.textContent = 'play_arrow';
+      label.textContent = t('hero_video_play', 'Play Video');
+      toggleBtn.setAttribute('aria-label', t('hero_video_play', 'Play background video'));
     }
   };
 
-  tryPlay();
+  updateHeroVideoUI = () => updateUI(!video.paused);
+
+  video.addEventListener('playing', () => updateUI(true));
+  video.addEventListener('pause', () => updateUI(false));
+
+  const attemptPlay = () => {
+    if (userExplicitlyPaused) return;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => updateUI(true))
+        .catch(() => updateUI(false));
+    }
+  };
+
+  // Immediate attempt
+  attemptPlay();
+
+  // Retry when data / frames are ready
+  video.addEventListener('canplay', () => {
+    if (video.paused && !userExplicitlyPaused) attemptPlay();
+  });
+  video.addEventListener('loadeddata', () => {
+    if (video.paused && !userExplicitlyPaused) attemptPlay();
+  });
+
+  // Browser Autoplay Policy Fallback: start on first user interaction if blocked
+  const onUserInteraction = () => {
+    if (video.paused && !userExplicitlyPaused) {
+      attemptPlay();
+    }
+    ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(evt => {
+      window.removeEventListener(evt, onUserInteraction);
+    });
+  };
+  ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(evt => {
+    window.addEventListener(evt, onUserInteraction, { once: true, passive: true });
+  });
 
   // Interactive toggle button
-  if (toggleBtn && icon && label) {
+  if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
       if (video.paused) {
-        video.play().then(() => {
-          icon.textContent = 'pause';
-          label.textContent = 'Pause Video';
-          toggleBtn.setAttribute('aria-label', 'Pause background video');
-        }).catch(err => console.log('Playback error:', err));
+        userExplicitlyPaused = false;
+        video.play().then(() => updateUI(true)).catch(err => console.warn('Video play error:', err));
       } else {
+        userExplicitlyPaused = true;
         video.pause();
-        icon.textContent = 'play_arrow';
-        label.textContent = 'Play Video';
-        toggleBtn.setAttribute('aria-label', 'Play background video');
+        updateUI(false);
       }
     });
   }
