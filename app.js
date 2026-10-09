@@ -755,28 +755,81 @@ function initLightbox() {
 function initMobileMenu() {
   const menuBtn = document.getElementById('mobile-menu-btn');
   const drawer = document.getElementById('mobile-drawer');
+  const backdrop = document.getElementById('mobile-drawer-backdrop');
   const closeBtn = document.getElementById('close-mobile-drawer');
-  const drawerLinks = drawer ? drawer.querySelectorAll('a') : [];
+  const drawerLinks = drawer ? drawer.querySelectorAll('.nav-drawer-link') : [];
+  const drawerReserveBtn = drawer ? drawer.querySelector('.btn-open-reserve') : null;
 
   if (!menuBtn || !drawer) return;
 
   function openDrawer() {
     drawer.classList.remove('hidden');
     drawer.classList.add('flex');
+    menuBtn.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
   }
 
-  function closeDrawer() {
+  function closeDrawer(restoreScroll = true) {
     drawer.classList.add('hidden');
     drawer.classList.remove('flex');
-    document.body.style.overflow = '';
+    menuBtn.setAttribute('aria-expanded', 'false');
+    if (restoreScroll) {
+      document.body.style.overflow = '';
+    }
   }
 
-  menuBtn.addEventListener('click', openDrawer);
-  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  menuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isHidden = drawer.classList.contains('hidden');
+    if (isHidden) {
+      openDrawer();
+    } else {
+      closeDrawer(true);
+    }
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeDrawer(true);
+      menuBtn.focus();
+    });
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', () => {
+      closeDrawer(true);
+      menuBtn.focus();
+    });
+  }
 
   drawerLinks.forEach(link => {
-    link.addEventListener('click', closeDrawer);
+    link.addEventListener('click', () => {
+      closeDrawer(true);
+    });
+  });
+
+  if (drawerReserveBtn) {
+    drawerReserveBtn.addEventListener('click', () => {
+      // Close drawer without resetting body overflow since the reservation modal is opening
+      closeDrawer(false);
+    });
+  }
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !drawer.classList.contains('hidden')) {
+      closeDrawer(true);
+      menuBtn.focus();
+    }
+  });
+
+  // Close when screen resizes to desktop breakpoint
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024 && !drawer.classList.contains('hidden')) {
+      closeDrawer(true);
+    }
   });
 }
 
@@ -802,7 +855,7 @@ function initAddressCopy() {
    -------------------------------------------------------------------------- */
 function initScrollSpy() {
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+  const navLinks = document.querySelectorAll('header nav a[href^="#"]');
 
   if (!sections.length || !navLinks.length) return;
 
