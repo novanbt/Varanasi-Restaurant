@@ -132,21 +132,24 @@
         <a class="font-body-md text-on-surface-variant hover:text-primary py-1 transition-colors" href="#visit-sanctuary" data-i18n="nav_find_us">Find Us</a>
       </nav>
 
-      <!-- Right Header Actions (Clean & Single Line) -->
+      <!-- Right Header Actions (Clean & Responsive: Desktop actions vs. Mobile Hamburger) -->
       <div class="flex items-center gap-2 sm:gap-3 shrink-0 whitespace-nowrap">
-        <a href="tel:01097171118" aria-label="Call +82 10-9717-1118" title="Call Varanasi: +82 10-9717-1118" data-i18n-aria="nav_call_aria" class="flex items-center justify-center w-10 h-10 min-w-[40px] min-h-[40px] rounded-full border border-sand-border bg-pure-cream hover:bg-surface-container text-primary hover:text-secondary shadow-xs transition-colors">
+        <!-- Call Button: Desktop only (lg:flex), accessible inside hamburger menu on mobile -->
+        <a href="tel:01097171118" aria-label="Call +82 10-9717-1118" title="Call Varanasi: +82 10-9717-1118" data-i18n-aria="nav_call_aria" class="hidden lg:flex items-center justify-center w-10 h-10 min-w-[40px] min-h-[40px] rounded-full border border-sand-border bg-pure-cream hover:bg-surface-container text-primary hover:text-secondary shadow-xs transition-colors">
           <span class="material-symbols-outlined text-[20px]">call</span>
         </a>
-        <button type="button" class="btn-open-reserve hidden sm:inline-flex items-center justify-center gap-1.5 bg-primary text-on-primary font-label-caps text-xs uppercase tracking-wider px-4 sm:px-5 py-2.5 min-h-[42px] rounded shadow-sm hover:bg-primary-container transition-all">
+        <!-- Reserve Table: Desktop only (lg:inline-flex) -->
+        <button type="button" class="btn-open-reserve hidden lg:inline-flex items-center justify-center gap-1.5 bg-primary text-on-primary font-label-caps text-xs uppercase tracking-wider px-4 sm:px-5 py-2.5 min-h-[42px] rounded shadow-sm hover:bg-primary-container transition-all">
           <span class="material-symbols-outlined text-[16px]">calendar_month</span>
           <span data-i18n="nav_reserve">Reserve Table</span>
         </button>
-        <!-- Language Toggle Button immediately to the right of Reservation button -->
-        <button id="lang-toggle-btn" type="button" aria-label="Switch language to Korean" class="inline-flex items-center justify-center gap-1.5 border border-sand-border bg-pure-cream hover:bg-surface-container text-primary font-label-caps text-xs px-3 sm:px-3.5 py-2 sm:py-2.5 min-h-[40px] sm:min-h-[42px] rounded shadow-xs transition-all font-semibold cursor-pointer">
+        <!-- Language Toggle: Desktop only (lg:inline-flex), accessible inside hamburger menu on mobile -->
+        <button id="lang-toggle-btn" type="button" aria-label="Switch language to Korean" class="hidden lg:inline-flex items-center justify-center gap-1.5 border border-sand-border bg-pure-cream hover:bg-surface-container text-primary font-label-caps text-xs px-3 sm:px-3.5 py-2 sm:py-2.5 min-h-[40px] sm:min-h-[42px] rounded shadow-xs transition-all font-semibold cursor-pointer">
           <span class="material-symbols-outlined text-[16px] text-secondary">translate</span>
           <span id="lang-toggle-text">한국어</span>
         </button>
-        <button id="mobile-menu-btn" type="button" aria-controls="mobile-drawer" aria-expanded="false" aria-label="Toggle navigation menu" class="lg:hidden flex items-center justify-center w-10 h-10 min-w-[40px] min-h-[40px] rounded-lg bg-pure-cream text-primary border border-sand-border hover:bg-surface-container focus:outline-none transition-colors">
+        <!-- Mobile Menu Hamburger Button: Visible on screens < lg -->
+        <button id="mobile-menu-btn" type="button" aria-controls="mobile-drawer" aria-expanded="false" aria-label="Toggle navigation menu" class="lg:hidden flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg bg-pure-cream text-primary border border-sand-border hover:bg-surface-container focus:outline-none transition-colors shadow-xs">
           <span class="material-symbols-outlined text-[24px]">menu</span>
         </button>
       </div>
@@ -171,7 +174,21 @@
         </button>
       </div>
 
-      <nav class="flex flex-col py-5 space-y-1">
+      <!-- Mobile Quick Actions: Language Toggle & Quick Call -->
+      <div class="grid grid-cols-2 gap-2.5 pt-4 pb-2 border-b border-sand-border/70">
+        <!-- Mobile Drawer Language Toggle -->
+        <button id="mobile-lang-toggle-btn" type="button" aria-label="Switch language to Korean" class="w-full min-h-[44px] flex items-center justify-center gap-2 bg-pure-cream border border-sand-border text-primary py-2 px-3 rounded-xl font-label-caps text-xs uppercase tracking-wider hover:bg-surface-container transition-all font-semibold shadow-xs">
+          <span class="material-symbols-outlined text-[18px] text-secondary">translate</span>
+          <span id="mobile-lang-toggle-text">한국어</span>
+        </button>
+        <!-- Mobile Quick Call -->
+        <a href="tel:01097171118" aria-label="Call Varanasi: +82 10-9717-1118" data-i18n-aria="nav_call_aria" class="w-full min-h-[44px] flex items-center justify-center gap-2 bg-pure-cream border border-sand-border text-primary py-2 px-3 rounded-xl font-label-caps text-xs uppercase tracking-wider hover:bg-surface-container transition-all font-semibold shadow-xs">
+          <span class="material-symbols-outlined text-[18px] text-secondary">call</span>
+          <span data-i18n="drawer_quick_call">Call Us</span>
+        </a>
+      </div>
+
+      <nav class="flex flex-col py-4 space-y-1">
         <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#top" data-i18n="drawer_home">Home</a>
         <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#signature-experience" data-i18n="drawer_signatures">Signature Dishes</a>
         <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#our-story" data-i18n="drawer_story">Our Story</a>
@@ -180,21 +197,16 @@
         <a class="nav-drawer-link text-lg sm:text-xl font-headline-sm text-primary hover:text-secondary py-3 px-2 border-b border-sand-border/30 rounded-md transition-colors min-h-[44px] flex items-center" href="#visit-sanctuary" data-i18n="drawer_location">Location &amp; Visit</a>
       </nav>
 
-      <div class="mt-auto pt-6 space-y-3 border-t border-sand-border">
-        <!-- Mobile Drawer Language Toggle -->
-        <button id="mobile-lang-toggle-btn" type="button" aria-label="Switch language to Korean" class="w-full min-h-[46px] flex items-center justify-center gap-2 bg-pure-cream border border-sand-border text-primary py-2.5 px-4 rounded-xl font-label-caps text-xs uppercase tracking-wider hover:bg-surface-container transition-all font-semibold shadow-xs">
-          <span class="material-symbols-outlined text-[18px] text-secondary">translate</span>
-          <span id="mobile-lang-toggle-text">한국어</span>
-        </button>
+      <div class="mt-auto pt-5 space-y-2.5 border-t border-sand-border">
         <button type="button" class="btn-open-reserve w-full min-h-[48px] flex items-center justify-center gap-2 bg-primary text-on-primary py-3 px-4 rounded-xl font-label-caps uppercase text-xs tracking-wider shadow-md hover:bg-primary-container transition-all">
           <span class="material-symbols-outlined text-[18px]">calendar_month</span>
           <span data-i18n="drawer_reserve">Reserve a Table</span>
         </button>
-        <a href="tel:01097171118" class="w-full min-h-[48px] flex items-center justify-center gap-2 bg-pure-cream border border-sand-border text-primary py-3 px-4 rounded-xl font-label-caps uppercase text-xs tracking-wider hover:bg-surface-container transition-all">
+        <a href="tel:01097171118" class="w-full min-h-[46px] flex items-center justify-center gap-2 bg-pure-cream border border-sand-border text-primary py-2.5 px-4 rounded-xl font-label-caps uppercase text-xs tracking-wider hover:bg-surface-container transition-all">
           <span class="material-symbols-outlined text-[18px]">call</span>
           <span data-i18n="drawer_call">Call: +82 10-9717-1118</span>
         </a>
-        <div class="text-center text-[11px] text-charcoal-muted pt-2 space-y-0.5">
+        <div class="text-center text-[11px] text-charcoal-muted pt-1 space-y-0.5">
           <p class="font-medium text-primary" data-i18n="drawer_address">2nd Floor, 85 Dongseong-ro 5-gil, Jung-gu, Daegu</p>
           <p data-i18n="drawer_hours">Daily 11:30 – 22:00 (Tuesday Closed)</p>
         </div>

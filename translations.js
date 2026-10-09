@@ -30,6 +30,7 @@ var TRANSLATIONS = {
     drawer_location: "Location & Visit",
     drawer_reserve: "Reserve a Table",
     drawer_call: "Call: +82 10-9717-1118",
+    drawer_quick_call: "Call Us",
     drawer_address: "2nd Floor, 85 Dongseong-ro 5-gil, Jung-gu, Daegu",
     drawer_hours: "Daily 11:30 – 22:00 (Tuesday Closed)",
 
@@ -315,6 +316,7 @@ var TRANSLATIONS = {
     drawer_location: "위치 & 오시는 길",
     drawer_reserve: "테이블 예약하기",
     drawer_call: "전화 문의: 010-9717-1118",
+    drawer_quick_call: "전화 문의",
     drawer_address: "대구광역시 중구 동성로5길 85, 2층",
     drawer_hours: "매일 11:30 – 22:00 (화요일 정기 휴무)",
 
